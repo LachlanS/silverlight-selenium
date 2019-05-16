@@ -57,10 +57,11 @@ namespace ThoughtWorks.Selenium.Silvernium
             string functionArgs = "";
             if (parameters.Any())
             {
-                for (int i = 0; i < parameters.Length; i++)
+                foreach (var p in parameters)
                 {
-                    functionArgs = functionArgs + "'" + parameters[i] + "',";
+                    functionArgs = functionArgs + "'" + p + "',";
                 }
+
                 // remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
@@ -72,10 +73,11 @@ namespace ThoughtWorks.Selenium.Silvernium
             string functionArgs = "";
             if (parameters.Any())
             {
-                for (int i = 0; i < parameters.Length; i++)
+                foreach (var p in parameters)
                 {
-                    functionArgs = functionArgs + "'" + parameters[i] + "',";
+                    functionArgs = functionArgs + "'" + p + "',";
                 }
+
                 // remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
@@ -87,10 +89,11 @@ namespace ThoughtWorks.Selenium.Silvernium
             string functionArgs = "";
             if (parameters.Any())
             {
-                for (int i=0; i<parameters.Length; i++)
+                foreach (var p in parameters)
                 {
-                    functionArgs = functionArgs + "'" + parameters[i] + "',";
+                    functionArgs = functionArgs + "'" + p + "',";
                 }
+
                 //remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
