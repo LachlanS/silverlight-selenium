@@ -134,7 +134,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
                 {
                     if (string.IsNullOrEmpty(value))
                     {
-                        comboBox.SelectedItem = item;
+                        comboBox.SelectedItem = null;
                         return;
                     }
                     continue;
