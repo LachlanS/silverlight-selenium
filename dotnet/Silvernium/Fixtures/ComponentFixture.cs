@@ -12,9 +12,9 @@ namespace DBServer.Selenium.Silvernium.Fixtures
     {
         protected const long Timeout = 5000;
         protected ThoughtWorks.Selenium.Silvernium.Silvernium Silvernium { get; set; }
-        protected string GridPath { get; private set; }
-        protected int RowIndex { get; private set; }
-        protected string Path { get; private set; }
+        protected string GridPath { get; }
+        protected int RowIndex { get; }
+        protected string Path { get; }
 
         protected ComponentFixture(ThoughtWorks.Selenium.Silvernium.Silvernium silvernium, string path)
         {
