@@ -1,4 +1,4 @@
-using NMock;
+using Moq;
 using NUnit.Framework;
 using Selenium;
 using ThoughtWorks.Selenium.Silvernium;
@@ -8,29 +8,31 @@ namespace UnitTests
     [TestFixture]
     public class SilverLightSeleniumTests
     {
-        private DynamicMock _mockProcessor;
+        private Mock<ISelenium> _mockSelenium;
         private ISelenium _selenium;
         private Silvernium _silvernium;
 
         [SetUp]
         public void SetUp()
         {
-            _mockProcessor = new DynamicMock(typeof (ISelenium));
-            _selenium = (ISelenium) _mockProcessor.MockInstance;
-            _mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
+            _mockSelenium = new Mock<ISelenium>();
+            _selenium = _mockSelenium.Object;
+            _mockSelenium
+                .Setup(x => x.GetEval("navigator.userAgent"))
+                .Returns("Firefox/2.0.0.18");
         }
 
         [TearDown]
         public void TearDown()
         {
-            _mockProcessor.Verify();
+            _mockSelenium.Verify();
         }
 
 
         [Test]
         public void ShouldCreateXamlContent()
         {
-            _mockProcessor.Expect("GetEval", "document['Test'].content.createFromXaml('xamlContent','namescope');");
+            _mockSelenium.Setup(x => x.GetEval("document['Test'].content.createFromXaml('xamlContent','namescope');"));
             _silvernium = new Silvernium(_selenium, "Test");
             _silvernium.CreateFromXaml("xamlContent", "namescope");
         }
@@ -38,7 +40,9 @@ namespace UnitTests
         [Test]
         public void ShouldFindName()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "Return Name", "document['Test'].content.findName('objectName');");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].content.findName('objectName');"))
+                .Returns("Return Name");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.AreEqual("Return Name", _silvernium.FindName("objectName"));
         }
@@ -46,7 +50,9 @@ namespace UnitTests
         [Test]
         public void ShouldInitParams()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "List of init params", "document['Test'].initParams;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].initParams;"))
+                .Returns("List of init params");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.AreEqual("List of init params", _silvernium.InitParams());
         }
@@ -54,8 +60,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnAccessibilityValue()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "Some Accessibility Return Value",
-                                          "document['Test'].content.accessibility;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].content.accessibility;"))
+                .Returns("Some Accessibility Return Value");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.AreEqual("Some Accessibility Return Value", _silvernium.Accessibility());
         }
@@ -63,7 +70,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnActualHeightOfMovie()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "42", "document['Test'].content.actualHeight;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].content.actualHeight;"))
+                .Returns("42");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.AreEqual(42, _silvernium.ActualHeight());
         }
@@ -71,7 +80,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnActualWidthOfMovie()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "24", "document['Test'].content.actualWidth;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].content.actualWidth;"))
+                .Returns("24");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.AreEqual(24, _silvernium.ActualWidth());
         }
@@ -79,7 +90,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnFullScreenAttributes()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "True", "document['Test'].content.fullScreen;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].content.fullScreen;"))
+                .Returns("True");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.IsTrue(_silvernium.FullScreen());
         }
@@ -87,7 +100,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnTrueIfLoaded()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "True", "document['Test'].isLoaded;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].isLoaded;"))
+                .Returns("True");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.IsTrue(_silvernium.IsLoaded());
         }
@@ -95,7 +110,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnTrueIfVersionIsSupported()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "true", "document['Test'].isVersionSupported('10');");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].isVersionSupported('10');"))
+                .Returns("true");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.IsTrue(_silvernium.IsVersionSupported("10"));
         }
@@ -103,7 +120,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnRoot()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "Root Content", "document['Test'].root;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].root;"))
+                .Returns("Root Content");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.AreEqual("Root Content", _silvernium.Root());
         }
@@ -111,7 +130,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnBackgroundInformation()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "Bg Info", "document['Test'].settings.background;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].settings.background;"))
+                .Returns("Bg Info");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.AreEqual("Bg Info", _silvernium.Background());
         }
@@ -119,11 +140,21 @@ namespace UnitTests
         [Test]
         public void ShouldCallSettingsProperties()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "True", "document['Test'].settings.enabledFramerateCounter;");
-            _mockProcessor.ExpectAndReturn("GetEval", "True", "document['Test'].settings.enableRedrawRegions;");
-            _mockProcessor.ExpectAndReturn("GetEval", "True", "document['Test'].settings.enableHtmlAccess;");
-            _mockProcessor.ExpectAndReturn("GetEval", "42", "document['Test'].settings.maxFrameRate;");
-            _mockProcessor.ExpectAndReturn("GetEval", "True", "document['Test'].settings.windowless;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].settings.enabledFramerateCounter;"))
+                .Returns("True");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].settings.enableRedrawRegions;"))
+                .Returns("True");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].settings.enableHtmlAccess;"))
+                .Returns("True");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].settings.maxFrameRate;"))
+                .Returns("42");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].settings.windowless;"))
+                .Returns("True");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.IsTrue(_silvernium.EnabledFrameRateCounter());
             Assert.IsTrue(_silvernium.EnableRedrawRegions());
@@ -135,7 +166,9 @@ namespace UnitTests
         [Test]
         public void ShouldReturnSource()
         {
-            _mockProcessor.ExpectAndReturn("GetEval", "Source Code", "document['Test'].source;");
+            _mockSelenium
+                .Setup(x => x.GetEval("document['Test'].source;"))
+                .Returns("Source Code");
             _silvernium = new Silvernium(_selenium, "Test");
             Assert.AreEqual("Source Code", _silvernium.Source());
         }
