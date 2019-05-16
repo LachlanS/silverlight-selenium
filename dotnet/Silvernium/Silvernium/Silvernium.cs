@@ -58,7 +58,7 @@ namespace ThoughtWorks.Selenium.Silvernium
         public string JsForDirectMethod(string functionName, params string[] parameters)
         {
             string functionArgs = "";
-            if (parameters.Count() > 0)
+            if (parameters.Any())
             {
                 for (int i = 0; i < parameters.Count(); i++)
                 {
@@ -73,7 +73,7 @@ namespace ThoughtWorks.Selenium.Silvernium
         public string JsForContentScriptMethod(string functionName, params string[] parameters)
         {
             string functionArgs = "";
-            if (parameters.Count() > 0)
+            if (parameters.Any())
             {
                 for (int i = 0; i < parameters.Count(); i++)
                 {
@@ -88,7 +88,7 @@ namespace ThoughtWorks.Selenium.Silvernium
         public string JsForContentMethod(string functionName, params string[] parameters)
         {
             string functionArgs = "";
-            if (parameters.Count() > 0)
+            if (parameters.Any())
             {
                 for (int i=0; i<parameters.Count(); i++)
                 {
