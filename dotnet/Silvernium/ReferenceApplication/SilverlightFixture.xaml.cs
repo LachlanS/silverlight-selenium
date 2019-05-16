@@ -75,7 +75,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             {
                 return (string)item.GetType().GetProperty(displayMemberPath).GetValue(item, null);
             }
-            if (comboBoxItem != null && comboBoxItem.Content.GetType() == typeof(string))
+            if (comboBoxItem != null && comboBoxItem.Content is string)
             {
                 return (string) comboBoxItem.Content;
             }
@@ -149,7 +149,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
                         return;
                     }
                 }
-                else if (comboBoxItem != null && comboBoxItem.Content.GetType() == typeof(string) && ((string)comboBoxItem.Content) == value)
+                else if (comboBoxItem != null && comboBoxItem.Content is string && ((string)comboBoxItem.Content) == value)
                 {
                     comboBox.SelectedItem = item;
                     return;
@@ -421,7 +421,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             description += node;
             description += !string.IsNullOrEmpty(node.GetValue(NameProperty).ToString()) 
                 ? " - " + node.GetValue(NameProperty) : "";
-            if (node.GetType() == typeof(TextBlock))
+            if (node is TextBlock)
             {
                 description += " - " + ((TextBlock)node).Text;
             }
