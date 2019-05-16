@@ -4,7 +4,7 @@
     {
         private const string Host = "localhost";
         private const int Port = 4444;
-        private const string BrowserString = "*firefox";
+        private const Browser Browser = Fixtures.Browser.InternetExplorer;
         private const string Url = "http://localhost:1981/ReferenceApplication.aspx?testMode=true";
 
         private static ReferenceApplicationFixture _instance;
@@ -14,7 +14,7 @@
             return _instance ?? (_instance = new ReferenceApplicationFixture());
         }
 
-        private ReferenceApplicationFixture() : base(Host, Port, BrowserString, Url) { }
+        private ReferenceApplicationFixture() : base(Host, Port, Browser, Url) { }
 
     }
 }

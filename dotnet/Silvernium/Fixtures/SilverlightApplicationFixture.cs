@@ -1,4 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 using Selenium;
 
 namespace DBServer.Selenium.Silvernium.Fixtures
@@ -10,9 +14,25 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         private readonly ThoughtWorks.Selenium.Silvernium.Silvernium _silvernium;
 
-        public SilverlightApplicationFixture(string host, int port, string browserString, string url)
+        public SilverlightApplicationFixture(string host, int port, Browser browser, string url)
         {
-            ISelenium selenium = new DefaultSelenium(host, port, browserString, url);
+            var uriBuilder = new UriBuilder { Host = host, Port = port };
+
+            IWebDriver driver;
+            switch (browser)
+            {
+                case Browser.Firefox:
+                    driver = new FirefoxDriver();
+                    break;
+                case Browser.InternetExplorer:
+                    driver = new InternetExplorerDriver();
+                    break;
+                default:
+                    throw new Exception("Browser is not implemented");
+            }
+
+            var selenium = new WebDriverBackedSelenium(driver, uriBuilder.Uri);
+
             selenium.Start();
             selenium.Open(url);
             selenium.SetSpeed("100");
