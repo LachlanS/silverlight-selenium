@@ -1,18 +1,18 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using NUnit.Framework;
 using Selenium;
 using ThoughtWorks.Selenium.Silvernium;
 
 namespace UnitTests
 {
-    [TestFixture]
+    [TestClass]
     public class SilverLightSeleniumTests
     {
         private Mock<ISelenium> _mockSelenium;
         private ISelenium _selenium;
         private Silvernium _silvernium;
 
-        [SetUp]
+        [TestInitialize]
         public void SetUp()
         {
             _mockSelenium = new Mock<ISelenium>();
@@ -22,14 +22,14 @@ namespace UnitTests
                 .Returns("Firefox/2.0.0.18");
         }
 
-        [TearDown]
+        [TestMethod]
         public void TearDown()
         {
             _mockSelenium.Verify();
         }
 
 
-        [Test]
+        [TestMethod]
         public void ShouldCreateXamlContent()
         {
             _mockSelenium.Setup(x => x.GetEval("document['Test'].content.createFromXaml('xamlContent','namescope');"));
@@ -37,7 +37,7 @@ namespace UnitTests
             _silvernium.CreateFromXaml("xamlContent", "namescope");
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldFindName()
         {
             _mockSelenium
@@ -47,7 +47,7 @@ namespace UnitTests
             Assert.AreEqual("Return Name", _silvernium.FindName("objectName"));
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldInitParams()
         {
             _mockSelenium
@@ -57,7 +57,7 @@ namespace UnitTests
             Assert.AreEqual("List of init params", _silvernium.InitParams());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnAccessibilityValue()
         {
             _mockSelenium
@@ -67,7 +67,7 @@ namespace UnitTests
             Assert.AreEqual("Some Accessibility Return Value", _silvernium.Accessibility());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnActualHeightOfMovie()
         {
             _mockSelenium
@@ -77,7 +77,7 @@ namespace UnitTests
             Assert.AreEqual(42, _silvernium.ActualHeight());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnActualWidthOfMovie()
         {
             _mockSelenium
@@ -87,7 +87,7 @@ namespace UnitTests
             Assert.AreEqual(24, _silvernium.ActualWidth());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnFullScreenAttributes()
         {
             _mockSelenium
@@ -97,7 +97,7 @@ namespace UnitTests
             Assert.IsTrue(_silvernium.FullScreen());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnTrueIfLoaded()
         {
             _mockSelenium
@@ -107,7 +107,7 @@ namespace UnitTests
             Assert.IsTrue(_silvernium.IsLoaded());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnTrueIfVersionIsSupported()
         {
             _mockSelenium
@@ -117,7 +117,7 @@ namespace UnitTests
             Assert.IsTrue(_silvernium.IsVersionSupported("10"));
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnRoot()
         {
             _mockSelenium
@@ -127,7 +127,7 @@ namespace UnitTests
             Assert.AreEqual("Root Content", _silvernium.Root());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnBackgroundInformation()
         {
             _mockSelenium
@@ -137,7 +137,7 @@ namespace UnitTests
             Assert.AreEqual("Bg Info", _silvernium.Background());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldCallSettingsProperties()
         {
             _mockSelenium
@@ -163,7 +163,7 @@ namespace UnitTests
             Assert.IsTrue(_silvernium.WindowLess());
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnSource()
         {
             _mockSelenium

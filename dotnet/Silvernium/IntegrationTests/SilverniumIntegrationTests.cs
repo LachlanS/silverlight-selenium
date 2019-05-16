@@ -1,18 +1,18 @@
 ﻿using System;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.IE;
 using Selenium;
 using ThoughtWorks.Selenium.Silvernium;
 
 namespace IntegrationTests
 {
-    [TestFixture]
+    [TestClass]
     public class SilverniumIntegrationTests
     {
         private ISelenium _selenium;
         private Silvernium _silvernium;
 
-        [SetUp]
+        [TestInitialize]
         public void SetUp()
         {
             var uriBuilder = new UriBuilder { Host = "localhost", Port = 4444 };
@@ -25,13 +25,13 @@ namespace IntegrationTests
             _silvernium = new Silvernium(_selenium, "Test");
         }
 
-        [TearDown]
+        [TestCleanup]
         public void TearDown()
         {
             _selenium.Stop();
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldSpawnBrowserOnSeleniumAndFetchSilverLightJsStringPreixForMsie()
         {
             Assert.AreEqual("window.document['Test'].", _silvernium.SilverLightJSStringPrefix);

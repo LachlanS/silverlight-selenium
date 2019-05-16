@@ -1,23 +1,23 @@
-﻿using Moq;
-using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Selenium;
 using ThoughtWorks.Selenium.Silvernium;
 
 namespace UnitTests
 {
-    [TestFixture]
+    [TestClass]
     public class SilverniumTests
     {
         #region Setup/Teardown
 
-        [SetUp]
+        [TestInitialize]
         public void SetUp()
         {
             _mockSelenium = new Mock<ISelenium>();
             _selenium = _mockSelenium.Object;
         }
 
-        [TearDown]
+        [TestCleanup]
         public void TearDown()
         {
             _mockSelenium.Verify();
@@ -29,7 +29,7 @@ namespace UnitTests
         private ISelenium _selenium;
         private Silvernium _silvernium;
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnDocumentJsPrefixForFf2()
         {
             _mockSelenium
@@ -39,7 +39,7 @@ namespace UnitTests
             Assert.AreEqual("document['test'].", _silvernium.CreateJsPrefixDocument("test"));
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnJsFunctionForDirectMethodForFf2()
         {
             _mockSelenium
@@ -52,7 +52,7 @@ namespace UnitTests
                             _silvernium.JsForDirectMethod("Func3", "42", "24"));
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnJsFunctionForDirectMethodForMsie()
         {
             _mockSelenium
@@ -65,7 +65,7 @@ namespace UnitTests
                             _silvernium.JsForDirectMethod("Func3", "42", "24"));
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnJsFunctionForScriptMethodForFf2()
         {
             _mockSelenium
@@ -79,7 +79,7 @@ namespace UnitTests
                             _silvernium.JsForContentScriptMethod("Func3", "42", "24"));
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnJsFunctionForScriptMethodForFf3()
         {
             _mockSelenium
@@ -93,7 +93,7 @@ namespace UnitTests
                             _silvernium.JsForContentScriptMethod("Func3", "42", "24"));
         }
         
-        [Test]
+        [TestMethod]
         public void ShouldReturnJsFunctionForContentMethodForFf2()
         {
             _mockSelenium
@@ -107,7 +107,7 @@ namespace UnitTests
                             _silvernium.JsForContentMethod("Func3", "42", "24"));
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnJsFunctionForContentMethodForFf3()
         {
             _mockSelenium
@@ -121,7 +121,7 @@ namespace UnitTests
                             _silvernium.JsForContentMethod("Func3", "42", "24"));
         }
 
-        [Test]
+        [TestMethod]
         public void ShouldReturnWindowDocumentJsPrefixForFf3()
         {
             _mockSelenium
