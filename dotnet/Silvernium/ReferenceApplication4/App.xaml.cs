@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace DBServer.Selenium.Silvernium.ReferenceApplication
 {
-    public partial class App : Application
+    public partial class App
     {
 
         public App()
