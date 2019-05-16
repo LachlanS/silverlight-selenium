@@ -46,7 +46,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             }
         }
 
-        private long CurrentMilliseconds()
+        private static long CurrentMilliseconds()
         {
             return (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds;
         }

@@ -31,7 +31,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return GetValue(control);
         }
 
-        private string GetValue(DependencyObject control)
+        private static string GetValue(DependencyObject control)
         {
             if (control is AutoCompleteBox)
             {
@@ -60,7 +60,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             throw new SilverlightFixtureException("Unsupported control type: " + control.GetType());
         }
 
-        private string GetValue(ComboBox comboBox)
+        private static string GetValue(ComboBox comboBox)
         {
             var displayMemberPath = comboBox.DisplayMemberPath;
 
@@ -98,7 +98,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             SetValue(component, value);
         }
 
-        private void SetValue(DependencyObject component, string value)
+        private static void SetValue(DependencyObject component, string value)
         {
             if (component is AutoCompleteBox)
             {
@@ -122,7 +122,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             }
         }
 
-        private void SetValue(ComboBox comboBox, string value)
+        private static void SetValue(ComboBox comboBox, string value)
         {
             var displayMemberPath = comboBox.DisplayMemberPath;
             for (var i = 0; i < comboBox.Items.Count; i++)
@@ -168,7 +168,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             throw new SilverlightFixtureException("Value not found: " + value);
         }
 
-        private bool HasStringInSomePropertyOfItselfOrChildren(DependencyObject node, string value)
+        private static bool HasStringInSomePropertyOfItselfOrChildren(DependencyObject node, string value)
         {
             foreach (var property in node.GetType().GetProperties())
             {
@@ -187,7 +187,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return false;
         }
 
-        private string GetStringsFromPropertiesOfItselfAndChildren(DependencyObject node, string currentStrings)
+        private static string GetStringsFromPropertiesOfItselfAndChildren(DependencyObject node, string currentStrings)
         {
             foreach (var property in node.GetType().GetProperties())
             {
@@ -215,7 +215,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return IsEnabled(control).ToString();
         }
 
-        private new bool IsEnabled(DependencyObject control)
+        private new static bool IsEnabled(DependencyObject control)
         {
             if (control is TextBox)
             {
@@ -244,7 +244,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             Click(button);
         }
 
-        private void Click(Button button)
+        private static void Click(Button button)
         {
             var peer = new ButtonAutomationPeer(button);
             var ip = (IInvokeProvider)peer;
@@ -263,7 +263,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return GetProperty(control, propertyName).ToString();
         }
 
-        private object GetProperty(DependencyObject control, string propertyName)
+        private static object GetProperty(DependencyObject control, string propertyName)
         {
             return control.GetType().GetProperty(propertyName).GetValue(control, null);
         }
@@ -274,7 +274,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return IsCellPresent(dataGrid, value).ToString();
         }
 
-        private bool IsCellPresent(DataGrid dataGrid, string value)
+        private static bool IsCellPresent(DataGrid dataGrid, string value)
         {
             if (dataGrid.ItemsSource != null)
             {
@@ -370,7 +370,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return FindControl(path, dataGridRow);
         }
 
-        private DependencyObject FindControl(string path, DependencyObject currentParent)
+        private static DependencyObject FindControl(string path, DependencyObject currentParent)
         {
             var currChildren = currentParent.GetVisualChildren();
             foreach (var item in currChildren)
@@ -386,19 +386,19 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return null;
         }
 
-        private DataGridRow FindDataGridRowByIndex(DataGrid dataGrid, int index)
+        private static DataGridRow FindDataGridRowByIndex(DataGrid dataGrid, int index)
         {
             return (DataGridRow)FindChildrenByType(dataGrid, typeof(DataGridRow))[index];
         }
 
-        private List<DependencyObject> FindChildrenByType(DependencyObject parent, Type type)
+        private static List<DependencyObject> FindChildrenByType(DependencyObject parent, Type type)
         {
             var children = new List<DependencyObject>();
             FindChildrenByType(parent, type, children);
             return children;
         }
 
-        private void FindChildrenByType(DependencyObject parent, Type type, ICollection<DependencyObject> children)
+        private static void FindChildrenByType(DependencyObject parent, Type type, ICollection<DependencyObject> children)
         {
             if (parent.GetType() == type)
             {
@@ -415,7 +415,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             return Describe(FindControl(path), "");
         }
 
-        private string Describe(DependencyObject node, string identation)
+        private static string Describe(DependencyObject node, string identation)
         {
             var description = identation == string.Empty ? "" : identation.Substring(0, identation.Length - 1) + "-";
             description += node;

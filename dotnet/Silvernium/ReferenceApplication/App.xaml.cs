@@ -27,11 +27,11 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             }
         }
 
-        private void Application_Exit(object sender, EventArgs e)
+        private static void Application_Exit(object sender, EventArgs e)
         {
 
         }
-        private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
+        private static void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             // If the app is running outside of the debugger then report the exception using
             // the browser's exception mechanism. On IE this will display it a yellow alert 
@@ -47,7 +47,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
                 Deployment.Current.Dispatcher.BeginInvoke(delegate { ReportErrorToDom(e); });
             }
         }
-        private void ReportErrorToDom(ApplicationUnhandledExceptionEventArgs e)
+        private static void ReportErrorToDom(ApplicationUnhandledExceptionEventArgs e)
         {
             try
             {
