@@ -60,7 +60,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             string functionArgs = "";
             if (parameters.Any())
             {
-                for (int i = 0; i < parameters.Count(); i++)
+                for (int i = 0; i < parameters.Length; i++)
                 {
                     functionArgs = functionArgs + "'" + parameters[i] + "',";
                 }
@@ -75,7 +75,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             string functionArgs = "";
             if (parameters.Any())
             {
-                for (int i = 0; i < parameters.Count(); i++)
+                for (int i = 0; i < parameters.Length; i++)
                 {
                     functionArgs = functionArgs + "'" + parameters[i] + "',";
                 }
@@ -90,7 +90,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             string functionArgs = "";
             if (parameters.Any())
             {
-                for (int i=0; i<parameters.Count(); i++)
+                for (int i=0; i<parameters.Length; i++)
                 {
                     functionArgs = functionArgs + "'" + parameters[i] + "',";
                 }
