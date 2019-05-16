@@ -60,7 +60,7 @@
     <form id="form1" runat="server" style="height:100%">
     <div id="silverlightControlHost">
         <object id="silverlight" data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="100%" height="100%">
-          <param name="InitParams" value="testMode=<%=Boolean.TrueString.Equals(Request.Params["testMode"], StringComparison.CurrentCultureIgnoreCase)%>" />
+          <param name="InitParams" value="testMode=<%=bool.TrueString.Equals(Request.Params["testMode"], StringComparison.CurrentCultureIgnoreCase)%>" />
 		  <param name="source" value="ClientBin/ReferenceApplication4.xap"/>
 		  <param name="onError" value="onSilverlightError" />
 		  <param name="background" value="white" />

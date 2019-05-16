@@ -110,11 +110,11 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             }
             else if (component is CheckBox)
             {
-                ((CheckBox)component).IsChecked = Boolean.Parse(value);
+                ((CheckBox)component).IsChecked = bool.Parse(value);
             }
             else if (component is RadioButton)
             {
-                ((RadioButton)component).IsChecked = Boolean.Parse(value);
+                ((RadioButton)component).IsChecked = bool.Parse(value);
             }
             else if (component is ComboBox)
             {

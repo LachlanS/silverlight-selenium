@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DBServer.Selenium.Silvernium.Fixtures
+﻿namespace DBServer.Selenium.Silvernium.Fixtures
 {
     public class CheckBoxFixture : ComponentFixture
     {
@@ -12,20 +10,20 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         public CheckBoxFixture Uncheck()
         {
-            Call("SetValue", Boolean.FalseString);
+            Call("SetValue", bool.FalseString);
             return this;
         }
 
         public CheckBoxFixture Check()
         {
-            Call("SetValue", Boolean.TrueString);
+            Call("SetValue", bool.TrueString);
             return this;
         }
 
         public CheckBoxFixture RequireChecked()
         {
             var value = Call("GetValue");
-            if (!Boolean.Parse(value))
+            if (!bool.Parse(value))
             {
                 throw new SilverniumFixtureException("Checkbox was not checked");
             }
@@ -35,7 +33,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public CheckBoxFixture RequireUnchecked()
         {
             var value = Call("GetValue");
-            if (Boolean.Parse(value))
+            if (bool.Parse(value))
             {
                 throw new SilverniumFixtureException("Checkbox was checked");
             }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DBServer.Selenium.Silvernium.Fixtures
+﻿namespace DBServer.Selenium.Silvernium.Fixtures
 {
     public class TextBoxFixture : ComponentFixture
     {
@@ -52,7 +50,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public TextBoxFixture RequireEnabled()
         {
             var enabled = Call("IsEnabled");
-            if (!Boolean.Parse(enabled))
+            if (!bool.Parse(enabled))
             {
                 throw new SilverniumFixtureException("Text box should be enabled");
             }
@@ -62,7 +60,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public TextBoxFixture RequireDisabled()
         {
             var enabled = Call("IsEnabled");
-            if (Boolean.Parse(enabled))
+            if (bool.Parse(enabled))
             {
                 throw new SilverniumFixtureException("Text box should be disabled");
             }

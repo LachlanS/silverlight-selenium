@@ -17,7 +17,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            if (e.InitParams.ContainsKey("testMode") && Boolean.Parse(e.InitParams["testMode"]))
+            if (e.InitParams.ContainsKey("testMode") && bool.Parse(e.InitParams["testMode"]))
             {
                 RootVisual = new SilverlightFixture();
             }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DBServer.Selenium.Silvernium.Fixtures
+﻿namespace DBServer.Selenium.Silvernium.Fixtures
 {
     public class ButtonFixture : ComponentFixture
     {
@@ -30,7 +28,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public ButtonFixture RequireEnabled()
         {
             var enabled = Call("IsEnabled");
-            if (!Boolean.Parse(enabled))
+            if (!bool.Parse(enabled))
             {
                 throw new SilverniumFixtureException("Button should be enabled");
             }
@@ -40,7 +38,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public ButtonFixture RequireDisabled()
         {
             var enabled = Call("IsEnabled");
-            if (Boolean.Parse(enabled))
+            if (bool.Parse(enabled))
             {
                 throw new SilverniumFixtureException("Button should be disabled");
             }
