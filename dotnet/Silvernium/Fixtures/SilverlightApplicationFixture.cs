@@ -8,16 +8,15 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         private const string ObjectId = "silverlight";
         private const string Scriptkey = "SilverlightFixture";
 
-        private readonly ISelenium _selenium;
         private readonly ThoughtWorks.Selenium.Silvernium.Silvernium _silvernium;
 
         public SilverlightApplicationFixture(string host, int port, string browserString, string url)
         {
-            _selenium = new DefaultSelenium(host, port, browserString, url);
-            _selenium.Start();
-            _selenium.Open(url);
-            _selenium.SetSpeed("100");
-            _silvernium = new ThoughtWorks.Selenium.Silvernium.Silvernium(_selenium, ObjectId, Scriptkey);
+            ISelenium selenium = new DefaultSelenium(host, port, browserString, url);
+            selenium.Start();
+            selenium.Open(url);
+            selenium.SetSpeed("100");
+            _silvernium = new ThoughtWorks.Selenium.Silvernium.Silvernium(selenium, ObjectId, Scriptkey);
             while (!_silvernium.IsLoaded())
             {
                 Thread.Sleep(100);
