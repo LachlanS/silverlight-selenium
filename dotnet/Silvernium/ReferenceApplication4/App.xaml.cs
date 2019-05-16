@@ -17,9 +17,9 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
 
         public App()
         {
-            this.Startup += this.Application_Startup;
-            this.Exit += this.Application_Exit;
-            this.UnhandledException += this.Application_UnhandledException;
+            Startup += Application_Startup;
+            Exit += Application_Exit;
+            UnhandledException += Application_UnhandledException;
 
             InitializeComponent();
         }
@@ -28,11 +28,11 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
         {
             if (e.InitParams.ContainsKey("testMode") && Boolean.Parse(e.InitParams["testMode"]))
             {
-                this.RootVisual = new SilverlightFixture();
+                RootVisual = new SilverlightFixture();
             }
             else
             {
-                this.RootVisual = new MainPage();
+                RootVisual = new MainPage();
             }
         }
 
