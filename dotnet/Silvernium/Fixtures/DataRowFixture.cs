@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DBServer.Selenium.Silvernium.Fixtures;
-using ThoughtWorks.Selenium.Silvernium;
-
-namespace DBServer.Selenium.Silvernium.Fixtures
+﻿namespace DBServer.Selenium.Silvernium.Fixtures
 {
     public class DataRowFixture : ComponentFixture
     {

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ThoughtWorks.Selenium.Silvernium;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Selenium;
-using System.Threading;
+﻿using System.Threading;
 
 namespace DBServer.Selenium.Silvernium.Fixtures
 {

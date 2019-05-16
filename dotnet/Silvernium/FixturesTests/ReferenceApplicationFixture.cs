@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DBServer.Selenium.Silvernium.Fixtures.Tests
+﻿namespace DBServer.Selenium.Silvernium.Fixtures.Tests
 {
     class ReferenceApplicationFixture : SilverlightApplicationFixture
     {
