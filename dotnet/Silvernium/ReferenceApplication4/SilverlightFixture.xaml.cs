@@ -75,7 +75,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             {
                 return (string)item.GetType().GetProperty(displayMemberPath).GetValue(item, null);
             }
-            if (comboBoxItem != null && comboBoxItem.Content is string)
+            if (comboBoxItem?.Content is string)
             {
                 return (string) comboBoxItem.Content;
             }
@@ -149,7 +149,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
                         return;
                     }
                 }
-                else if (comboBoxItem != null && comboBoxItem.Content is string && ((string)comboBoxItem.Content) == value)
+                else if (comboBoxItem?.Content is string && ((string)comboBoxItem.Content) == value)
                 {
                     comboBox.SelectedItem = item;
                     return;
