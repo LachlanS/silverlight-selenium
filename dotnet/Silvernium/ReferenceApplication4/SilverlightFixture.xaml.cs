@@ -55,7 +55,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             }
             if (control is ComboBox)
             {
-                return GetValue(control as ComboBox);
+                return GetValue((ComboBox) control);
             }
             throw new SilverlightFixtureException("Unsupported control type: " + control.GetType());
         }
@@ -118,7 +118,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
             }
             else if (component is ComboBox)
             {
-                SetValue(component as ComboBox, value);
+                SetValue((ComboBox) component, value);
             }
         }
 
