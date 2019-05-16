@@ -26,10 +26,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             _silverLightJsStringPrefix = GetSilverLightJsStringPrefix(silverlightObjectId);
         }
 
-        public string SilverLightJSStringPrefix
-        {
-            get { return _silverLightJsStringPrefix; }
-        }
+        public string SilverLightJSStringPrefix => _silverLightJsStringPrefix;
 
         private string GetSilverLightJsStringPrefix(string silverlightObjectId)
         {

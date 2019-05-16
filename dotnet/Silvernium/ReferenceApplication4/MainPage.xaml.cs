@@ -116,10 +116,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
     public class EditableDataRow
     {
         public bool Editable { get; set; }
-        public bool ReadOnly
-        {
-            get { return !Editable; }
-        }
+        public bool ReadOnly => !Editable;
         public string Label { get; set; }
         public string ButtonContent { get; set; }
         public bool Checked { get; set; }
