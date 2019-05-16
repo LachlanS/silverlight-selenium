@@ -10,8 +10,8 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void ClickClicks()
         {
-            var textBox = App.TextBox("clearTextBox");
-            var button = App.Button("clearButton");
+            var textBox = App.TextBox("ClearTextBox");
+            var button = App.Button("ClearButton");
 
             textBox.SetText("This text should be cleared by the button above");
             button.Click();
@@ -21,40 +21,40 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireContentPassesForExpectedContent()
         {
-            App.Button("clearButton").RequireContent("This Button clears the TextBox below");
+            App.Button("ClearButton").RequireContent("This Button clears the TextBox below");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireContentThrowsExceptionForUnexpectedContent()
         {
-            App.Button("clearButton").RequireContent("This is not the Button content");
+            App.Button("ClearButton").RequireContent("This is not the Button content");
         }
 
         [TestMethod]
         public void RequireEnabledPassesForExpectedState()
         {
-            App.Button("clearButton").RequireEnabled();
+            App.Button("ClearButton").RequireEnabled();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireEnabledThrowsExceptionForUnexpectedState()
         {
-            App.Button("disabledButton").RequireEnabled();
+            App.Button("DisabledButton").RequireEnabled();
         }
 
         [TestMethod]
         public void RequireDisabledPassesForExpectedState()
         {
-            App.Button("disabledButton").RequireDisabled();
+            App.Button("DisabledButton").RequireDisabled();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireDisabledThrowsExceptionForUnexpectedState()
         {
-            App.Button("clearButton").RequireDisabled();
+            App.Button("ClearButton").RequireDisabled();
         }
 
     }

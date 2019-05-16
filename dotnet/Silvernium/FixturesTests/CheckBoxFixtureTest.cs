@@ -10,13 +10,13 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestInitialize]
         public void ResetReferenceCheckBox()
         {
-            App.CheckBox("checkBox").Uncheck();
+            App.CheckBox("CheckBox").Uncheck();
         }
 
         [TestMethod]
         public void CheckCheckes()
         {
-            App.CheckBox("checkBox")
+            App.CheckBox("CheckBox")
                 .Check()
                 .RequireChecked();
         }
@@ -24,7 +24,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void UncheckUncheckes()
         {
-            App.CheckBox("checkBox")
+            App.CheckBox("CheckBox")
                 .Uncheck()
                 .RequireUnchecked();
         }
@@ -32,7 +32,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireCheckedPassesIfCheckBoxIsChecked()
         {
-            App.CheckBox("checkBox")
+            App.CheckBox("CheckBox")
                 .Check()
                 .RequireChecked();
         }
@@ -41,7 +41,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireCheckedThrowsExceptionIfCheckBoxIsUnchecked()
         {
-            App.CheckBox("checkBox")
+            App.CheckBox("CheckBox")
                 .RequireChecked();
 
         }
@@ -49,7 +49,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireUncheckedPassesIfCheckBoxIsUnchecked()
         {
-            App.CheckBox("checkBox")
+            App.CheckBox("CheckBox")
                 .RequireUnchecked();
         }
 
@@ -57,7 +57,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireUncheckedThrowsExceptionIfCheckBoxIsChecked()
         {
-            App.CheckBox("checkBox")
+            App.CheckBox("CheckBox")
                 .Check()
                 .RequireUnchecked();
         }

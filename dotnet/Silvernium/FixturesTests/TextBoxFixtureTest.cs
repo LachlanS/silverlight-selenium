@@ -10,52 +10,52 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireTextPassesForCorrectValues()
         {
-            App.TextBox("textBox").RequireText("This is a TextBox");
+            App.TextBox("TextBox").RequireText("This is a TextBox");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireTextThrowsExceptionForIncorrectValues()
         {
-            App.TextBox("textBox").RequireText("This is not a TextBox");
+            App.TextBox("TextBox").RequireText("This is not a TextBox");
         }
 
         [TestMethod]
         public void RequireContainsPassesForExactValues()
         {
-            App.TextBox("textBox").RequireContains("This is a TextBox");
+            App.TextBox("TextBox").RequireContains("This is a TextBox");
         }
         
         [TestMethod]
         public void RequireContainsPassesForPartialValues()
         {
-            App.TextBox("textBox").RequireContains("is a Text");
+            App.TextBox("TextBox").RequireContains("is a Text");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireContainsThrowsExceptionForIncorrectValues()
         {
-            App.TextBox("textBox").RequireContains("is not a Text");
+            App.TextBox("TextBox").RequireContains("is not a Text");
         }
 
         [TestMethod]
         public void RequireNotContainsPassesForAbsentValues()
         {
-            App.TextBox("textBox").RequireNotContains("is not a Text");
+            App.TextBox("TextBox").RequireNotContains("is not a Text");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireNotContainsThrowsExceptionForPresentValues()
         {
-            App.TextBox("textBox").RequireNotContains("is a Text");
+            App.TextBox("TextBox").RequireNotContains("is a Text");
         }
 
         [TestMethod]
         public void SetTextChangesTextBoxValue()
         {
-            App.TextBox("textBox")
+            App.TextBox("TextBox")
                 .RequireText("This is a TextBox")
 
                 .SetText("This is still a TextBox")
@@ -68,27 +68,27 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireEnabledPassesForExpectedState()
         {
-            App.TextBox("textBox").RequireEnabled();
+            App.TextBox("TextBox").RequireEnabled();
         }
         
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireEnabledThrowsExceptionForUnexpectedState()
         {
-            App.TextBox("disabledTextBox").RequireEnabled();
+            App.TextBox("DisabledTextBox").RequireEnabled();
         }
 
         [TestMethod]
         public void RequireDisabledPassesForExpectedState()
         {
-            App.TextBox("disabledTextBox").RequireDisabled();
+            App.TextBox("DisabledTextBox").RequireDisabled();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireDisabledThrowsExceptionForUnexpectedState()
         {
-            App.TextBox("textBox").RequireDisabled();
+            App.TextBox("TextBox").RequireDisabled();
         }
 
     }

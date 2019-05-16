@@ -15,7 +15,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireCellPresentPassesForPresentCell()
         {
-            App.DataGrid("musiciansDataGrid")
+            App.DataGrid("MusiciansDataGrid")
                 .RequireCellPresent("Alex")
                 .RequireCellPresent("Geddy")
                 .RequireCellPresent("Neil")
@@ -28,26 +28,26 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireCellPresentThrowsExceptionForAbsentCell()
         {
-            App.DataGrid("musiciansDataGrid").RequireCellPresent("Kenny G");
+            App.DataGrid("MusiciansDataGrid").RequireCellPresent("Kenny G");
         }
 
         [TestMethod]
         public void RequireCellAbsentPassesForAbsentCell()
         {
-            App.DataGrid("musiciansDataGrid").RequireCellAbsent("Sax");
+            App.DataGrid("MusiciansDataGrid").RequireCellAbsent("Sax");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireCellAbsentThrowsExceptionForPresentCell()
         {
-            App.DataGrid("musiciansDataGrid").RequireCellAbsent("Drums");
+            App.DataGrid("MusiciansDataGrid").RequireCellAbsent("Drums");
         }
 
         [TestMethod]
         public void RowContainingReturnsAFixtureForTheRespectiveRow()
         {
-            var dataGrid = App.DataGrid("musiciansDataGrid");
+            var dataGrid = App.DataGrid("MusiciansDataGrid");
             dataGrid.RowContaining("Alex").RequireIndex(0);
             dataGrid.RowContaining("Geddy").RequireIndex(1);
             dataGrid.RowContaining("Neil").RequireIndex(2);
@@ -57,13 +57,13 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RowContainingThrowsExceptionIfThereIsNoRowContainingTheExpectedValue()
         {
-            App.DataGrid("musiciansDataGrid").RowContaining("Kenny G");
+            App.DataGrid("MusiciansDataGrid").RowContaining("Kenny G");
         }
 
         [TestMethod]
         public void RowByIndexReturnsAFixtureForTheRespectiveRow()
         {
-            var dataGrid = App.DataGrid("musiciansDataGrid");
+            var dataGrid = App.DataGrid("MusiciansDataGrid");
             dataGrid.RowByIndex(0).RequireIndex(0);
             dataGrid.RowByIndex(1).RequireIndex(1);
             dataGrid.RowByIndex(2).RequireIndex(2);
@@ -73,26 +73,26 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RowByIndexThrowsExceptionIfRowIndexIsOutOfBounds()
         {
-            App.DataGrid("musiciansDataGrid").RowByIndex(3);
+            App.DataGrid("MusiciansDataGrid").RowByIndex(3);
         }
 
         [TestMethod]
         public void RequireRowCountPassesForExpectedRowCount()
         {
-            App.DataGrid("musiciansDataGrid").RequireRowCount(3);
+            App.DataGrid("MusiciansDataGrid").RequireRowCount(3);
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireRowCountThrowsExceptionForUnexpectedRowCount()
         {
-            App.DataGrid("musiciansDataGrid").RequireRowCount(4);
+            App.DataGrid("MusiciansDataGrid").RequireRowCount(4);
         }
 
         [TestMethod]
         public void GoToPageContainingGoesToTheRightPage()
         {
-            var dataGrid = App.DataGrid("booksDataGrid", "booksDataPager");
+            var dataGrid = App.DataGrid("BooksDataGrid", "BooksDataPager");
             dataGrid
                 .GoToPageContaining("The Unbearable Lightness of Being").RequireCellPresent("Milan Kundera")
                 .GoToPageContaining("The Lord of The Rings").RequireCellPresent("J.R.R. Tolkien")
@@ -109,14 +109,14 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void GoToPageContainingThrowsExceptionIfThereIsNoPageContaningTheExpectedValue()
         {
-            App.DataGrid("booksDataGrid", "booksDataPager").GoToPageContaining("Paulo Coelho");
+            App.DataGrid("BooksDataGrid", "BooksDataPager").GoToPageContaining("Paulo Coelho");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void GoToPageContainingThrowsExceptionIfTheDataGridHasNoDataPager()
         {
-            App.DataGrid("musiciansDataGrid").GoToPageContaining("Drums");
+            App.DataGrid("MusiciansDataGrid").GoToPageContaining("Drums");
         }
 
     }

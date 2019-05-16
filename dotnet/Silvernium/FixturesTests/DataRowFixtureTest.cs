@@ -14,8 +14,8 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void SelectSelectsTheRow()
         {
-            var dataGrid = App.DataGrid("musiciansDataGrid");
-            var textBlock = App.TextBlock("musicianTextBlock");
+            var dataGrid = App.DataGrid("MusiciansDataGrid");
+            var textBlock = App.TextBlock("MusicianTextBlock");
 
             dataGrid.RowByIndex(0).Select();
             textBlock.RequireText("Alex plays Guitar");
@@ -28,7 +28,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireIndexPassesForExpectedIndex()
         {
-            var dataGrid = App.DataGrid("musiciansDataGrid");
+            var dataGrid = App.DataGrid("MusiciansDataGrid");
             dataGrid.RowContaining("Alex").RequireIndex(0);
             dataGrid.RowContaining("Geddy").RequireIndex(1);
             dataGrid.RowContaining("Neil").RequireIndex(2);
@@ -38,7 +38,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireIndexThrowsExceptionForUnexpectedIndex()
         {
-            App.DataGrid("musiciansDataGrid").RowContaining("Alex").RequireIndex(1);
+            App.DataGrid("MusiciansDataGrid").RowContaining("Alex").RequireIndex(1);
         }
 
     }

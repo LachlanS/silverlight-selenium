@@ -7,28 +7,28 @@ namespace IntegrationTests
     [TestFixture]
     public class SilverniumIntegrationTests
     {
-        private ISelenium selenium;
-        private Silvernium silvernium;
+        private ISelenium _selenium;
+        private Silvernium _silvernium;
 
         [SetUp]
         public void SetUp()
         {
-            selenium = new DefaultSelenium("localhost", 4444, "*iexplore", "http://localhost");
-            selenium.Start();
-            selenium.Open("http://localhost");
-            silvernium = new Silvernium(selenium, "Test");
+            _selenium = new DefaultSelenium("localhost", 4444, "*iexplore", "http://localhost");
+            _selenium.Start();
+            _selenium.Open("http://localhost");
+            _silvernium = new Silvernium(_selenium, "Test");
         }
 
         [TearDown]
         public void TearDown()
         {
-            selenium.Stop();
+            _selenium.Stop();
         }
 
         [Test]
-        public void ShouldSpawnBrowserOnSeleniumAndFetchSilverLightJSStringPreixForMSIE()
+        public void ShouldSpawnBrowserOnSeleniumAndFetchSilverLightJsStringPreixForMsie()
         {
-            Assert.AreEqual("window.document['Test'].", silvernium.SilverLightJSStringPrefix);
+            Assert.AreEqual("window.document['Test'].", _silvernium.SilverLightJSStringPrefix);
         }
     }
 }

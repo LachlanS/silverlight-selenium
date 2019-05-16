@@ -10,7 +10,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void CheckCheckes()
         {
-            App.DataGrid("editableDataGrid").RowByIndex(1).CheckBox("innerCheckBox")
+            App.DataGrid("EditableDataGrid").RowByIndex(1).CheckBox("InnerCheckBox")
                 .RequireUnchecked()
                 .Check()
                 .RequireChecked()
@@ -20,7 +20,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void UncheckUncheckes()
         {
-            App.DataGrid("editableDataGrid").RowByIndex(0).CheckBox("innerCheckBox")
+            App.DataGrid("EditableDataGrid").RowByIndex(0).CheckBox("InnerCheckBox")
                 .RequireChecked()
                 .Uncheck()
                 .RequireUnchecked()
@@ -30,27 +30,27 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireCheckedPassesIfCheckBoxIsChecked()
         {
-            App.DataGrid("editableDataGrid").RowByIndex(0).CheckBox("innerCheckBox").RequireChecked();
+            App.DataGrid("EditableDataGrid").RowByIndex(0).CheckBox("InnerCheckBox").RequireChecked();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireCheckedThrowsExceptionIfCheckBoxIsUnchecked()
         {
-            App.DataGrid("editableDataGrid").RowByIndex(1).CheckBox("innerCheckBox").RequireChecked();
+            App.DataGrid("EditableDataGrid").RowByIndex(1).CheckBox("InnerCheckBox").RequireChecked();
         }
 
         [TestMethod]
         public void RequireUncheckedPassesIfCheckBoxIsUnchecked()
         {
-            App.DataGrid("editableDataGrid").RowByIndex(1).CheckBox("innerCheckBox").RequireUnchecked();
+            App.DataGrid("EditableDataGrid").RowByIndex(1).CheckBox("InnerCheckBox").RequireUnchecked();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireUncheckedThrowsExceptionIfCheckBoxIsChecked()
         {
-            App.DataGrid("editableDataGrid").RowByIndex(0).CheckBox("innerCheckBox").RequireUnchecked();
+            App.DataGrid("EditableDataGrid").RowByIndex(0).CheckBox("InnerCheckBox").RequireUnchecked();
         }
 
     }

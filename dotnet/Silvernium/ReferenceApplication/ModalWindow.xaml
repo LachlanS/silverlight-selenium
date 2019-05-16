@@ -8,8 +8,8 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <TextBlock Name="messageTextBlock" Grid.Row="0" />
-        <Button Name="okButton" Content="OK" Click="OkButtonClick" Grid.Row="1" />
+        <TextBlock Name="MessageTextBlock" Grid.Row="0" />
+        <Button Name="OkButton" Content="OK" Click="OkButtonClick" Grid.Row="1" />
     </Grid>
 </controls:ChildWindow>
 

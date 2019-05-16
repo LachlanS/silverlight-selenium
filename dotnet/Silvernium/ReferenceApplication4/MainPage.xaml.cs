@@ -20,18 +20,18 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
 
         private void InitializeDisplayMemberPathComboBox()
         {
-            displayMemberPathComboBox.ItemsSource = new Collection<Person>
+            DisplayMemberPathComboBox.ItemsSource = new Collection<Person>
                                                         {
                                                             new Person {Id = 1, Name = "Arthur"},
                                                             new Person {Id = 2, Name = "John"},
                                                             new Person {Id = 3, Name = "Richard"}
                                                         };
-            displayMemberPathComboBox.SelectedIndex = 0;
+            DisplayMemberPathComboBox.SelectedIndex = 0;
         }
 
         private void InitializeMusiciansDataGrid()
         {
-            musiciansDataGrid.ItemsSource = new Collection<Musician>
+            MusiciansDataGrid.ItemsSource = new Collection<Musician>
                                                {
                                                    new Musician {Id = 1, Name = "Alex", Instrument = "Guitar"},
                                                    new Musician {Id = 2, Name = "Geddy", Instrument = "Bass"},
@@ -54,13 +54,13 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
                                 new Book {Title = "The Unbearable Lightness of Being", Author = "Milan Kundera"}
                             };
             var pagedView = new PagedCollectionView(books);
-            booksDataGrid.ItemsSource = pagedView;
-            booksDataPager.Source = pagedView;
+            BooksDataGrid.ItemsSource = pagedView;
+            BooksDataPager.Source = pagedView;
         }
 
         private void InitializeEditableDataGrid()
         {
-            editableDataGrid.ItemsSource =
+            EditableDataGrid.ItemsSource =
                 new Collection<EditableDataRow>
                 {
                    new EditableDataRow {Editable = true, Label = "Row 1", ButtonContent = "Button 1",
@@ -74,19 +74,19 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
 
         private void ClearButtonClick(object sender, RoutedEventArgs e)
         {
-            clearTextBox.Text = "";
+            ClearTextBox.Text = "";
         }
 
         private void MusiciansDataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (musiciansDataGrid.SelectedItem is Musician)
+            if (MusiciansDataGrid.SelectedItem is Musician)
             {
-                var musician = (Musician)musiciansDataGrid.SelectedItem;
-                musicianTextBlock.Text = musician.Name + " plays " + musician.Instrument;
+                var musician = (Musician)MusiciansDataGrid.SelectedItem;
+                MusicianTextBlock.Text = musician.Name + " plays " + musician.Instrument;
             }
             else
             {
-                musicianTextBlock.Text = "";
+                MusicianTextBlock.Text = "";
             }
         }
 

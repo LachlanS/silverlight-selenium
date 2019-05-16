@@ -17,7 +17,7 @@ namespace DBServer.Selenium.Silvernium.ReferenceApplication
         public ModalWindow(string message)
         {
             InitializeComponent();
-            messageTextBlock.Text = message;
+            MessageTextBlock.Text = message;
             WindowTracker.Instance().Track(this);
         }
 

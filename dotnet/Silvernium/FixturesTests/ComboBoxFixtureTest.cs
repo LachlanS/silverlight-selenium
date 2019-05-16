@@ -10,44 +10,44 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireValuePassesForCorrectValues()
         {
-            App.ComboBox("simpleComboBox").RequireValue("Option 1");
-            App.ComboBox("displayMemberPathComboBox").RequireValue("Arthur");
-            App.ComboBox("complexComboBox").RequireValue("Red");
-            App.ComboBox("disabledComboBox").RequireValue("Disabled ComboBox");
+            App.ComboBox("SimpleComboBox").RequireValue("Option 1");
+            App.ComboBox("DisplayMemberPathComboBox").RequireValue("Arthur");
+            App.ComboBox("ComplexComboBox").RequireValue("Red");
+            App.ComboBox("DisabledComboBox").RequireValue("Disabled ComboBox");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireValueThrowsExceptionForIncorrectValueInASimpleComboBox()
         {
-            App.TextBox("simpleComboBox").RequireText("This is not my value");
+            App.TextBox("SimpleComboBox").RequireText("This is not my value");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireValueThrowsExceptionForIncorrectValueInADisplayMemberPathComboBox()
         {
-            App.TextBox("displayMemberPathComboBox").RequireText("This is not my value");
+            App.TextBox("DisplayMemberPathComboBox").RequireText("This is not my value");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireValueThrowsExceptionForIncorrectValueInADisabledComboBox()
         {
-            App.TextBox("disabledComboBox").RequireText("This is not my value");
+            App.TextBox("DisabledComboBox").RequireText("This is not my value");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireValueThrowsExceptionForIncorrectValueInAComplexComboBox()
         {
-            App.TextBox("complexComboBox").RequireText("This is not my value");
+            App.TextBox("ComplexComboBox").RequireText("This is not my value");
         }
 
         [TestMethod]
         public void SetValueChangesComboBoxValue()
         {
-            App.ComboBox("simpleComboBox")
+            App.ComboBox("SimpleComboBox")
                 .RequireValue("Option 1")
                 .SetValue("Option 2")
                 .RequireValue("Option 2")
@@ -56,7 +56,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
                 .SetValue("Option 1")
                 .RequireValue("Option 1");
 
-            App.ComboBox("displayMemberPathComboBox")
+            App.ComboBox("DisplayMemberPathComboBox")
                 .RequireValue("Arthur")
                 .SetValue("John")
                 .RequireValue("John")
@@ -65,7 +65,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
                 .SetValue("Arthur")
                 .RequireValue("Arthur");
 
-            App.ComboBox("complexComboBox")
+            App.ComboBox("ComplexComboBox")
                 .RequireValue("Red")
                 .SetValue("Green")
                 .RequireValue("Green")
@@ -78,27 +78,27 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireEnabledPassesForExpectedState()
         {
-            App.ComboBox("simpleComboBox").RequireEnabled();
+            App.ComboBox("SimpleComboBox").RequireEnabled();
         }
         
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireEnabledThrowsExceptionForUnexpectedState()
         {
-            App.ComboBox("disabledComboBox").RequireEnabled();
+            App.ComboBox("DisabledComboBox").RequireEnabled();
         }
 
         [TestMethod]
         public void RequireDisabledPassesForExpectedState()
         {
-            App.ComboBox("disabledComboBox").RequireDisabled();
+            App.ComboBox("DisabledComboBox").RequireDisabled();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireDisabledThrowsExceptionForUnexpectedState()
         {
-            App.ComboBox("simpleComboBox").RequireDisabled();
+            App.ComboBox("SimpleComboBox").RequireDisabled();
         }
 
     }

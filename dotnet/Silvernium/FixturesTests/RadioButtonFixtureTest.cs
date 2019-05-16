@@ -10,14 +10,14 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestInitialize]
         public void ResetReferenceRadioButton()
         {
-            App.RadioButton("radioButtonILike").Select();
+            App.RadioButton("RadioButtonILike").Select();
         }
 
         [TestMethod]
         public void SelectSelectsTheRadioButtonAndUnselectOtherRadiosInTheSameGroup()
         {
-            var radioButtonILike = App.RadioButton("radioButtonILike");
-            var radioButtonIHate = App.RadioButton("radioButtonIHate");
+            var radioButtonILike = App.RadioButton("RadioButtonILike");
+            var radioButtonIHate = App.RadioButton("RadioButtonIHate");
 
             radioButtonIHate
                 .Select()
@@ -33,27 +33,27 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireSelectedPassesIfTheRadioButtonIsSelected()
         {
-            App.RadioButton("radioButtonILike").RequireSelected();
+            App.RadioButton("RadioButtonILike").RequireSelected();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireSelectedThrowsExceptionIfTheRadioButtonIsUnselected()
         {
-            App.RadioButton("radioButtonIHate").RequireSelected();
+            App.RadioButton("RadioButtonIHate").RequireSelected();
         }
 
         [TestMethod]
         public void RequireUnselectedPassesIfTheRadioButtonIsNotSelected()
         {
-            App.RadioButton("radioButtonIHate").RequireUnselected();
+            App.RadioButton("RadioButtonIHate").RequireUnselected();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireUnselectedThrowsExceptionIfTheRadioButtonIsSelected()
         {
-            App.RadioButton("radioButtonILike").RequireUnselected();
+            App.RadioButton("RadioButtonILike").RequireUnselected();
         }
 
     }

@@ -6,56 +6,56 @@ namespace ThoughtWorks.Selenium.Silvernium
 {
     public class Silvernium
     {
-        private readonly string scriptKey = "";
-        private readonly ISelenium selenium;
-        private readonly string silverLightJSStringPrefix;
+        private readonly string _scriptKey = "";
+        private readonly ISelenium _selenium;
+        private readonly string _silverLightJsStringPrefix;
 
         public Silvernium(ISelenium selenium, string silverlightObjectId, string scriptKey)
         {
             if (!string.IsNullOrEmpty(scriptKey))
             {
-                this.scriptKey = scriptKey + ".";
+                _scriptKey = scriptKey + ".";
             }
-            this.selenium = selenium;
-            silverLightJSStringPrefix = GetSilverLightJSStringPrefix(silverlightObjectId);
+            _selenium = selenium;
+            _silverLightJsStringPrefix = GetSilverLightJsStringPrefix(silverlightObjectId);
         }
 
         public Silvernium(ISelenium selenium, string silverlightObjectId)
         {
-            this.selenium = selenium;
-            silverLightJSStringPrefix = GetSilverLightJSStringPrefix(silverlightObjectId);
+            _selenium = selenium;
+            _silverLightJsStringPrefix = GetSilverLightJsStringPrefix(silverlightObjectId);
         }
 
         public string SilverLightJSStringPrefix
         {
-            get { return silverLightJSStringPrefix; }
+            get { return _silverLightJsStringPrefix; }
         }
 
-        private string GetSilverLightJSStringPrefix(string silverlightObjectId)
+        private string GetSilverLightJsStringPrefix(string silverlightObjectId)
         {
-            string appName = selenium.GetEval("navigator.userAgent");
-            if (appName.Contains(BrowserConstants.FIREFOX2))
+            string appName = _selenium.GetEval("navigator.userAgent");
+            if (appName.Contains(BrowserConstants.Firefox2))
             {
-                return createJSPrefixDocument(silverlightObjectId);
+                return CreateJsPrefixDocument(silverlightObjectId);
             }
-            if (appName.Contains(BrowserConstants.FIREFOX) || appName.Contains(BrowserConstants.IE))
+            if (appName.Contains(BrowserConstants.Firefox) || appName.Contains(BrowserConstants.InternetExplorer))
             {
-                return createJSPrefixWindowDocument(silverlightObjectId);
+                return CreateJsPrefixWindowDocument(silverlightObjectId);
             }
             return string.Empty;
         }
 
-        public string createJSPrefixWindowDocument(string silverlightObjectId)
+        public string CreateJsPrefixWindowDocument(string silverlightObjectId)
         {
             return "window.document['" + silverlightObjectId + "'].";
         }
 
-        public string createJSPrefixDocument(string silverlightObjectId)
+        public string CreateJsPrefixDocument(string silverlightObjectId)
         {
             return "document['" + silverlightObjectId + "'].";
         }
 
-        public string jsForDirectMethod(string functionName, params string[] parameters)
+        public string JsForDirectMethod(string functionName, params string[] parameters)
         {
             string functionArgs = "";
             if (parameters.Count() > 0)
@@ -67,10 +67,10 @@ namespace ThoughtWorks.Selenium.Silvernium
                 // remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
-            return silverLightJSStringPrefix + functionName + "(" + functionArgs + ");";
+            return _silverLightJsStringPrefix + functionName + "(" + functionArgs + ");";
         }
 
-        public string jsForContentScriptMethod(string functionName, params string[] parameters)
+        public string JsForContentScriptMethod(string functionName, params string[] parameters)
         {
             string functionArgs = "";
             if (parameters.Count() > 0)
@@ -82,10 +82,10 @@ namespace ThoughtWorks.Selenium.Silvernium
                 // remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
-            return silverLightJSStringPrefix + "content." + scriptKey + functionName + "(" + functionArgs + ");";
+            return _silverLightJsStringPrefix + "content." + _scriptKey + functionName + "(" + functionArgs + ");";
         }
 
-        public string jsForContentMethod(string functionName, params string[] parameters)
+        public string JsForContentMethod(string functionName, params string[] parameters)
         {
             string functionArgs = "";
             if (parameters.Count() > 0)
@@ -97,87 +97,87 @@ namespace ThoughtWorks.Selenium.Silvernium
                 //remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
-            return silverLightJSStringPrefix + "content." + functionName + "(" + functionArgs + ");";
+            return _silverLightJsStringPrefix + "content." + functionName + "(" + functionArgs + ");";
         }
 
-        private string jsForContentProperty(string propertyName)
+        private string JsForContentProperty(string propertyName)
         {
-            return silverLightJSStringPrefix + "content." + propertyName + ";";
+            return _silverLightJsStringPrefix + "content." + propertyName + ";";
         }
 
-        private string jsForDirectProperty(string propertyName)
+        private string JsForDirectProperty(string propertyName)
         {
-            return silverLightJSStringPrefix + propertyName + ";";
+            return _silverLightJsStringPrefix + propertyName + ";";
         }
 
-        private string jsForSettingsProperty(string propertyName)
+        private string JsForSettingsProperty(string propertyName)
         {
-            return silverLightJSStringPrefix + "settings." + propertyName + ";";
+            return _silverLightJsStringPrefix + "settings." + propertyName + ";";
         }
 
-        private string jsForContentScriptGetProperty(string propertyName)
+        private string JsForContentScriptGetProperty(string propertyName)
         {
-            return silverLightJSStringPrefix + "content." + scriptKey + propertyName + ";";
+            return _silverLightJsStringPrefix + "content." + _scriptKey + propertyName + ";";
         }
 
-        private string jsForContentScriptSetProperty(string propertyName, string parameters)
+        private string JsForContentScriptSetProperty(string propertyName, string parameters)
         {
-            return silverLightJSStringPrefix + "content." + scriptKey + propertyName + "='" + parameters + "';";
+            return _silverLightJsStringPrefix + "content." + _scriptKey + propertyName + "='" + parameters + "';";
         }
 
         public void Start()
         {
-            selenium.Start();
+            _selenium.Start();
         }
 
         public void Stop()
         {
-            selenium.Stop();
+            _selenium.Stop();
         }
 
         public void Open(string url)
         {
-            selenium.Open(url);
+            _selenium.Open(url);
         }
 
         public string DirectMethod(string functionName, params string[] parameters)
         {
-            return selenium.GetEval(jsForDirectMethod(functionName, parameters));
+            return _selenium.GetEval(JsForDirectMethod(functionName, parameters));
         }
 
         public string ContentMethod(string functionName, params string[] parameters)
         {
-            return selenium.GetEval(jsForContentMethod(functionName, parameters));
+            return _selenium.GetEval(JsForContentMethod(functionName, parameters));
         }
 
         private string ContentProperty(string propertyName)
         {
-            return selenium.GetEval(jsForContentProperty(propertyName));
+            return _selenium.GetEval(JsForContentProperty(propertyName));
         }
 
         private string DirectProperty(string propertyName)
         {
-            return selenium.GetEval(jsForDirectProperty(propertyName));
+            return _selenium.GetEval(JsForDirectProperty(propertyName));
         }
 
         private string SettingsProperty(string propertyName)
         {
-            return selenium.GetEval(jsForSettingsProperty(propertyName));
+            return _selenium.GetEval(JsForSettingsProperty(propertyName));
         }
 
         public string GetPropertyValue(string propertyName)
         {
-            return selenium.GetEval(jsForContentScriptGetProperty(propertyName));
+            return _selenium.GetEval(JsForContentScriptGetProperty(propertyName));
         }
 
         public string SetPropertyValue(string propertyName, string parameters)
         {
-            return selenium.GetEval(jsForContentScriptSetProperty(propertyName, parameters));
+            return _selenium.GetEval(JsForContentScriptSetProperty(propertyName, parameters));
         }
 
         public string Call(string functionName, params string[] parameters)
         {
-            return selenium.GetEval(jsForContentScriptMethod(functionName, parameters));
+            return _selenium.GetEval(JsForContentScriptMethod(functionName, parameters));
         }
 
         //Silverlight Methods
@@ -201,7 +201,7 @@ namespace ThoughtWorks.Selenium.Silvernium
             return ContentProperty("accessibility");
         }
 
-        public void CreateFromXAML(string xamlContent, string namescope)
+        public void CreateFromXaml(string xamlContent, string namescope)
         {
             ContentMethod("createFromXaml", xamlContent, namescope);
         }

@@ -13,106 +13,106 @@ namespace UnitTests
         [SetUp]
         public void SetUp()
         {
-            mockProcessor = new DynamicMock(typeof (ISelenium));
-            selenium = (ISelenium) mockProcessor.MockInstance;
+            _mockProcessor = new DynamicMock(typeof (ISelenium));
+            _selenium = (ISelenium) _mockProcessor.MockInstance;
         }
 
         [TearDown]
         public void TearDown()
         {
-            mockProcessor.Verify();
+            _mockProcessor.Verify();
         }
 
         #endregion
 
-        private DynamicMock mockProcessor;
-        private ISelenium selenium;
-        private Silvernium silvernium;
+        private DynamicMock _mockProcessor;
+        private ISelenium _selenium;
+        private Silvernium _silvernium;
 
         [Test]
-        public void ShouldReturnDocumentJSPrefixForFF2()
+        public void ShouldReturnDocumentJsPrefixForFf2()
         {
-            mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
-            silvernium = new Silvernium(selenium, "test");
-            Assert.AreEqual("document['test'].", silvernium.createJSPrefixDocument("test"));
+            _mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
+            _silvernium = new Silvernium(_selenium, "test");
+            Assert.AreEqual("document['test'].", _silvernium.CreateJsPrefixDocument("test"));
         }
 
         [Test]
-        public void ShouldReturnJSFunctionForDirectMethodForFF2()
+        public void ShouldReturnJsFunctionForDirectMethodForFf2()
         {
-            mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
-            silvernium = new Silvernium(selenium, "Test");
-            Assert.AreEqual("document['Test'].Func1();", silvernium.jsForDirectMethod("Func1"));
-            Assert.AreEqual("document['Test'].Func2('42');", silvernium.jsForDirectMethod("Func2", "42"));
+            _mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
+            _silvernium = new Silvernium(_selenium, "Test");
+            Assert.AreEqual("document['Test'].Func1();", _silvernium.JsForDirectMethod("Func1"));
+            Assert.AreEqual("document['Test'].Func2('42');", _silvernium.JsForDirectMethod("Func2", "42"));
             Assert.AreEqual("document['Test'].Func3('42','24');",
-                            silvernium.jsForDirectMethod("Func3", new[] {"42", "24"}));
+                            _silvernium.JsForDirectMethod("Func3", new[] {"42", "24"}));
         }
 
         [Test]
-        public void ShouldReturnJSFunctionForDirectMethodForMSIE()
+        public void ShouldReturnJsFunctionForDirectMethodForMsie()
         {
-            mockProcessor.ExpectAndReturn("GetEval", "MSIE", "navigator.userAgent");
-            silvernium = new Silvernium(selenium, "Test");
-            Assert.AreEqual("window.document['Test'].Func1();", silvernium.jsForDirectMethod("Func1"));
-            Assert.AreEqual("window.document['Test'].Func2('42');", silvernium.jsForDirectMethod("Func2", "42"));
+            _mockProcessor.ExpectAndReturn("GetEval", "MSIE", "navigator.userAgent");
+            _silvernium = new Silvernium(_selenium, "Test");
+            Assert.AreEqual("window.document['Test'].Func1();", _silvernium.JsForDirectMethod("Func1"));
+            Assert.AreEqual("window.document['Test'].Func2('42');", _silvernium.JsForDirectMethod("Func2", "42"));
             Assert.AreEqual("window.document['Test'].Func3('42','24');",
-                            silvernium.jsForDirectMethod("Func3", new[] {"42", "24"}));
+                            _silvernium.JsForDirectMethod("Func3", new[] {"42", "24"}));
         }
 
         [Test]
-        public void ShouldReturnJSFunctionForScriptMethodForFF2()
+        public void ShouldReturnJsFunctionForScriptMethodForFf2()
         {
-            mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
-            silvernium = new Silvernium(selenium, "Test", "Key");
-            Assert.AreEqual("document['Test'].content.Key.Func1();", silvernium.jsForContentScriptMethod("Func1"));
+            _mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
+            _silvernium = new Silvernium(_selenium, "Test", "Key");
+            Assert.AreEqual("document['Test'].content.Key.Func1();", _silvernium.JsForContentScriptMethod("Func1"));
             Assert.AreEqual("document['Test'].content.Key.Func2('42');",
-                            silvernium.jsForContentScriptMethod("Func2", "42"));
+                            _silvernium.JsForContentScriptMethod("Func2", "42"));
             Assert.AreEqual("document['Test'].content.Key.Func3('42','24');",
-                            silvernium.jsForContentScriptMethod("Func3", new[] {"42", "24"}));
+                            _silvernium.JsForContentScriptMethod("Func3", new[] {"42", "24"}));
         }
 
         [Test]
-        public void ShouldReturnJSFunctionForScriptMethodForFF3()
+        public void ShouldReturnJsFunctionForScriptMethodForFf3()
         {
-            mockProcessor.ExpectAndReturn("GetEval", "Firefox/3.0.0.1", "navigator.userAgent");
-            silvernium = new Silvernium(selenium, "Test", "Key");
-            Assert.AreEqual("window.document['Test'].content.Key.Func1();", silvernium.jsForContentScriptMethod("Func1"));
+            _mockProcessor.ExpectAndReturn("GetEval", "Firefox/3.0.0.1", "navigator.userAgent");
+            _silvernium = new Silvernium(_selenium, "Test", "Key");
+            Assert.AreEqual("window.document['Test'].content.Key.Func1();", _silvernium.JsForContentScriptMethod("Func1"));
             Assert.AreEqual("window.document['Test'].content.Key.Func2('42');",
-                            silvernium.jsForContentScriptMethod("Func2", "42"));
+                            _silvernium.JsForContentScriptMethod("Func2", "42"));
             Assert.AreEqual("window.document['Test'].content.Key.Func3('42','24');",
-                            silvernium.jsForContentScriptMethod("Func3", new[] {"42", "24"}));
+                            _silvernium.JsForContentScriptMethod("Func3", new[] {"42", "24"}));
         }
         
         [Test]
-        public void ShouldReturnJSFunctionForContentMethodForFF2()
+        public void ShouldReturnJsFunctionForContentMethodForFf2()
         {
-            mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
-            silvernium = new Silvernium(selenium, "Test", "Key");
-            Assert.AreEqual("document['Test'].content.Func1();", silvernium.jsForContentMethod("Func1"));
+            _mockProcessor.ExpectAndReturn("GetEval", "Firefox/2.0.0.18", "navigator.userAgent");
+            _silvernium = new Silvernium(_selenium, "Test", "Key");
+            Assert.AreEqual("document['Test'].content.Func1();", _silvernium.JsForContentMethod("Func1"));
             Assert.AreEqual("document['Test'].content.Func2('42');",
-                            silvernium.jsForContentMethod("Func2", "42"));
+                            _silvernium.JsForContentMethod("Func2", "42"));
             Assert.AreEqual("document['Test'].content.Func3('42','24');",
-                            silvernium.jsForContentMethod("Func3", new[] { "42", "24" }));
+                            _silvernium.JsForContentMethod("Func3", new[] { "42", "24" }));
         }
 
         [Test]
-        public void ShouldReturnJSFunctionForContentMethodForFF3()
+        public void ShouldReturnJsFunctionForContentMethodForFf3()
         {
-            mockProcessor.ExpectAndReturn("GetEval", "Firefox/3.0.0.1", "navigator.userAgent");
-            silvernium = new Silvernium(selenium, "Test", "Key");
-            Assert.AreEqual("window.document['Test'].content.Func1();", silvernium.jsForContentMethod("Func1"));
+            _mockProcessor.ExpectAndReturn("GetEval", "Firefox/3.0.0.1", "navigator.userAgent");
+            _silvernium = new Silvernium(_selenium, "Test", "Key");
+            Assert.AreEqual("window.document['Test'].content.Func1();", _silvernium.JsForContentMethod("Func1"));
             Assert.AreEqual("window.document['Test'].content.Func2('42');",
-                            silvernium.jsForContentMethod("Func2", "42"));
+                            _silvernium.JsForContentMethod("Func2", "42"));
             Assert.AreEqual("window.document['Test'].content.Func3('42','24');",
-                            silvernium.jsForContentMethod("Func3", new[] { "42", "24" }));
+                            _silvernium.JsForContentMethod("Func3", new[] { "42", "24" }));
         }
 
         [Test]
-        public void ShouldReturnWindowDocumentJSPrefixForFF3()
+        public void ShouldReturnWindowDocumentJsPrefixForFf3()
         {
-            mockProcessor.ExpectAndReturn("GetEval", "Firefox/3.0.0.1", "navigator.userAgent");
-            silvernium = new Silvernium(selenium, "test");
-            Assert.AreEqual("window.document['test'].", silvernium.createJSPrefixWindowDocument("test"));
+            _mockProcessor.ExpectAndReturn("GetEval", "Firefox/3.0.0.1", "navigator.userAgent");
+            _silvernium = new Silvernium(_selenium, "test");
+            Assert.AreEqual("window.document['test'].", _silvernium.CreateJsPrefixWindowDocument("test"));
         }
     }
 }

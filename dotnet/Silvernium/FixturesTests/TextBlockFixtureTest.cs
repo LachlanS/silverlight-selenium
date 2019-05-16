@@ -14,46 +14,46 @@ namespace DBServer.Selenium.Silvernium.Fixtures.Tests
         [TestMethod]
         public void RequireTextPassesForCorrectValues()
         {
-            App.TextBlock("textBlock").RequireText("This is a TextBlock");
+            App.TextBlock("TextBlock").RequireText("This is a TextBlock");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireTextThrowsExceptionForIncorrectValues()
         {
-            App.TextBlock("textBlock").RequireText("This is not a TextBlock");
+            App.TextBlock("TextBlock").RequireText("This is not a TextBlock");
         }
 
         [TestMethod]
         public void RequireContainsPassesForExactValues()
         {
-            App.TextBlock("textBlock").RequireContains("This is a TextBlock");
+            App.TextBlock("TextBlock").RequireContains("This is a TextBlock");
         }
 
         [TestMethod]
         public void RequireContainsPassesForPartialValues()
         {
-            App.TextBlock("textBlock").RequireContains("is a Text");
+            App.TextBlock("TextBlock").RequireContains("is a Text");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireContainsThrowsExceptionForIncorrectValues()
         {
-            App.TextBlock("textBlock").RequireContains("is not a Text");
+            App.TextBlock("TextBlock").RequireContains("is not a Text");
         }
 
         [TestMethod]
         public void RequireNotContainsPassesForAbsentValues()
         {
-            App.TextBlock("textBlock").RequireNotContains("is not a Text");
+            App.TextBlock("TextBlock").RequireNotContains("is not a Text");
         }
 
         [TestMethod]
         [ExpectedException(typeof(SilverniumFixtureException))]
         public void RequireNotContainsThrowsExceptionForPresentValues()
         {
-            App.TextBlock("textBlock").RequireNotContains("is a Text");
+            App.TextBlock("TextBlock").RequireNotContains("is a Text");
         }
 
     }
