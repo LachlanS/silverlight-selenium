@@ -45,7 +45,7 @@ namespace UnitTests
             Assert.AreEqual("document['Test'].Func1();", _silvernium.JsForDirectMethod("Func1"));
             Assert.AreEqual("document['Test'].Func2('42');", _silvernium.JsForDirectMethod("Func2", "42"));
             Assert.AreEqual("document['Test'].Func3('42','24');",
-                            _silvernium.JsForDirectMethod("Func3", new[] {"42", "24"}));
+                            _silvernium.JsForDirectMethod("Func3", "42", "24"));
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace UnitTests
             Assert.AreEqual("window.document['Test'].Func1();", _silvernium.JsForDirectMethod("Func1"));
             Assert.AreEqual("window.document['Test'].Func2('42');", _silvernium.JsForDirectMethod("Func2", "42"));
             Assert.AreEqual("window.document['Test'].Func3('42','24');",
-                            _silvernium.JsForDirectMethod("Func3", new[] {"42", "24"}));
+                            _silvernium.JsForDirectMethod("Func3", "42", "24"));
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace UnitTests
             Assert.AreEqual("document['Test'].content.Key.Func2('42');",
                             _silvernium.JsForContentScriptMethod("Func2", "42"));
             Assert.AreEqual("document['Test'].content.Key.Func3('42','24');",
-                            _silvernium.JsForContentScriptMethod("Func3", new[] {"42", "24"}));
+                            _silvernium.JsForContentScriptMethod("Func3", "42", "24"));
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace UnitTests
             Assert.AreEqual("window.document['Test'].content.Key.Func2('42');",
                             _silvernium.JsForContentScriptMethod("Func2", "42"));
             Assert.AreEqual("window.document['Test'].content.Key.Func3('42','24');",
-                            _silvernium.JsForContentScriptMethod("Func3", new[] {"42", "24"}));
+                            _silvernium.JsForContentScriptMethod("Func3", "42", "24"));
         }
         
         [Test]
@@ -92,7 +92,7 @@ namespace UnitTests
             Assert.AreEqual("document['Test'].content.Func2('42');",
                             _silvernium.JsForContentMethod("Func2", "42"));
             Assert.AreEqual("document['Test'].content.Func3('42','24');",
-                            _silvernium.JsForContentMethod("Func3", new[] { "42", "24" }));
+                            _silvernium.JsForContentMethod("Func3", "42", "24"));
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace UnitTests
             Assert.AreEqual("window.document['Test'].content.Func2('42');",
                             _silvernium.JsForContentMethod("Func2", "42"));
             Assert.AreEqual("window.document['Test'].content.Func3('42','24');",
-                            _silvernium.JsForContentMethod("Func3", new[] { "42", "24" }));
+                            _silvernium.JsForContentMethod("Func3", "42", "24"));
         }
 
         [Test]
