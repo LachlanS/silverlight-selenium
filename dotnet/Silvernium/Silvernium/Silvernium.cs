@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Linq;
-using Selenium;
+using OpenQA.Selenium;
 
 namespace ThoughtWorks.Selenium.Silvernium
 {
     public class Silvernium
     {
         private readonly string _scriptKey = "";
-        private readonly ISelenium _selenium;
+        private readonly IJavaScriptExecutor _javaScriptExecutor;
         private readonly string _silverLightJsStringPrefix;
 
-        public Silvernium(ISelenium selenium, string silverlightObjectId, string scriptKey)
+        public Silvernium(IJavaScriptExecutor javaScriptExecutor, string silverlightObjectId, string scriptKey)
         {
             if (!string.IsNullOrEmpty(scriptKey))
             {
                 _scriptKey = scriptKey + ".";
             }
-            _selenium = selenium;
+            _javaScriptExecutor = javaScriptExecutor;
             _silverLightJsStringPrefix = GetSilverLightJsStringPrefix(silverlightObjectId);
         }
 
-        public Silvernium(ISelenium selenium, string silverlightObjectId)
+        public Silvernium(IJavaScriptExecutor javaScriptExecutor, string silverlightObjectId)
         {
-            _selenium = selenium;
+            _javaScriptExecutor = javaScriptExecutor;
             _silverLightJsStringPrefix = GetSilverLightJsStringPrefix(silverlightObjectId);
         }
 
@@ -30,7 +30,7 @@ namespace ThoughtWorks.Selenium.Silvernium
 
         private string GetSilverLightJsStringPrefix(string silverlightObjectId)
         {
-            string appName = _selenium.GetEval("navigator.userAgent");
+            string appName = (string)_javaScriptExecutor.ExecuteScript("return navigator.userAgent");
 
             return appName.Contains(BrowserConstants.Firefox2)
                 ? CreateJsPrefixDocument(silverlightObjectId)
@@ -60,7 +60,7 @@ namespace ThoughtWorks.Selenium.Silvernium
                 // remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
-            return _silverLightJsStringPrefix + functionName + "(" + functionArgs + ");";
+            return "return " + _silverLightJsStringPrefix + functionName + "(" + functionArgs + ");";
         }
 
         public string JsForContentScriptMethod(string functionName, params string[] parameters)
@@ -76,7 +76,7 @@ namespace ThoughtWorks.Selenium.Silvernium
                 // remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
-            return _silverLightJsStringPrefix + "content." + _scriptKey + functionName + "(" + functionArgs + ");";
+            return "return " + _silverLightJsStringPrefix + "content." + _scriptKey + functionName + "(" + functionArgs + ");";
         }
 
         public string JsForContentMethod(string functionName, params string[] parameters)
@@ -92,87 +92,72 @@ namespace ThoughtWorks.Selenium.Silvernium
                 //remove last comma
                 functionArgs = functionArgs.Substring(0, functionArgs.Length - 1);
             }
-            return _silverLightJsStringPrefix + "content." + functionName + "(" + functionArgs + ");";
+            return "return " + _silverLightJsStringPrefix + "content." + functionName + "(" + functionArgs + ");";
         }
 
         private string JsForContentProperty(string propertyName)
         {
-            return _silverLightJsStringPrefix + "content." + propertyName + ";";
+            return "return " + _silverLightJsStringPrefix + "content." + propertyName + ";";
         }
 
         private string JsForDirectProperty(string propertyName)
         {
-            return _silverLightJsStringPrefix + propertyName + ";";
+            return "return " + _silverLightJsStringPrefix + propertyName + ";";
         }
 
         private string JsForSettingsProperty(string propertyName)
         {
-            return _silverLightJsStringPrefix + "settings." + propertyName + ";";
+            return "return " + _silverLightJsStringPrefix + "settings." + propertyName + ";";
         }
 
         private string JsForContentScriptGetProperty(string propertyName)
         {
-            return _silverLightJsStringPrefix + "content." + _scriptKey + propertyName + ";";
+            return "return " + _silverLightJsStringPrefix + "content." + _scriptKey + propertyName + ";";
         }
 
         private string JsForContentScriptSetProperty(string propertyName, string parameters)
         {
-            return _silverLightJsStringPrefix + "content." + _scriptKey + propertyName + "='" + parameters + "';";
+            return "return " + _silverLightJsStringPrefix + "content." + _scriptKey + propertyName + "='" + parameters + "';";
         }
 
-        public void Start()
+        public object DirectMethod(string functionName, params string[] parameters)
         {
-            _selenium.Start();
+            return _javaScriptExecutor.ExecuteScript(JsForDirectMethod(functionName, parameters));
         }
 
-        public void Stop()
+        public object ContentMethod(string functionName, params string[] parameters)
         {
-            _selenium.Stop();
+            return _javaScriptExecutor.ExecuteScript(JsForContentMethod(functionName, parameters));
         }
 
-        public void Open(string url)
+        private object ContentProperty(string propertyName)
         {
-            _selenium.Open(url);
+            return _javaScriptExecutor.ExecuteScript(JsForContentProperty(propertyName));
         }
 
-        public string DirectMethod(string functionName, params string[] parameters)
+        private object DirectProperty(string propertyName)
         {
-            return _selenium.GetEval(JsForDirectMethod(functionName, parameters));
+            return _javaScriptExecutor.ExecuteScript(JsForDirectProperty(propertyName));
         }
 
-        public string ContentMethod(string functionName, params string[] parameters)
+        private object SettingsProperty(string propertyName)
         {
-            return _selenium.GetEval(JsForContentMethod(functionName, parameters));
+            return _javaScriptExecutor.ExecuteScript(JsForSettingsProperty(propertyName));
         }
 
-        private string ContentProperty(string propertyName)
+        public object GetPropertyValue(string propertyName)
         {
-            return _selenium.GetEval(JsForContentProperty(propertyName));
+            return _javaScriptExecutor.ExecuteScript(JsForContentScriptGetProperty(propertyName));
         }
 
-        private string DirectProperty(string propertyName)
+        public object SetPropertyValue(string propertyName, string parameters)
         {
-            return _selenium.GetEval(JsForDirectProperty(propertyName));
+            return _javaScriptExecutor.ExecuteScript(JsForContentScriptSetProperty(propertyName, parameters));
         }
 
-        private string SettingsProperty(string propertyName)
+        public object Call(string functionName, params string[] parameters)
         {
-            return _selenium.GetEval(JsForSettingsProperty(propertyName));
-        }
-
-        public string GetPropertyValue(string propertyName)
-        {
-            return _selenium.GetEval(JsForContentScriptGetProperty(propertyName));
-        }
-
-        public string SetPropertyValue(string propertyName, string parameters)
-        {
-            return _selenium.GetEval(JsForContentScriptSetProperty(propertyName, parameters));
-        }
-
-        public string Call(string functionName, params string[] parameters)
-        {
-            return _selenium.GetEval(JsForContentScriptMethod(functionName, parameters));
+            return _javaScriptExecutor.ExecuteScript(JsForContentScriptMethod(functionName, parameters));
         }
 
         //Silverlight Methods
@@ -193,7 +178,7 @@ namespace ThoughtWorks.Selenium.Silvernium
 
         public string Accessibility()
         {
-            return ContentProperty("accessibility");
+            return (string)ContentProperty("accessibility");
         }
 
         public void CreateFromXaml(string xamlContent, string namescope)
@@ -203,7 +188,7 @@ namespace ThoughtWorks.Selenium.Silvernium
 
         public string FindName(string objectName)
         {
-            return ContentMethod("findName", objectName);
+            return (string)ContentMethod("findName", objectName);
         }
 
         public bool FullScreen()
@@ -213,7 +198,7 @@ namespace ThoughtWorks.Selenium.Silvernium
 
         public string InitParams()
         {
-            return DirectProperty("initParams");
+            return (string)DirectProperty("initParams");
         }
 
         public bool IsLoaded()
@@ -223,12 +208,12 @@ namespace ThoughtWorks.Selenium.Silvernium
 
         public string Root()
         {
-            return DirectProperty("root");
+            return (string)DirectProperty("root");
         }
 
         public string Background()
         {
-            return SettingsProperty("background");
+            return (string)SettingsProperty("background");
         }
 
         public bool EnabledFrameRateCounter()
@@ -258,7 +243,7 @@ namespace ThoughtWorks.Selenium.Silvernium
 
         public string Source()
         {
-            return DirectProperty("source");
-        }	
+            return (string)DirectProperty("source");
+        }
     }
 }

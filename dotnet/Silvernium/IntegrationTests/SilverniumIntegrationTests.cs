@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
-using Selenium;
 using ThoughtWorks.Selenium.Silvernium;
 
 namespace IntegrationTests
@@ -9,26 +8,22 @@ namespace IntegrationTests
     [TestClass]
     public class SilverniumIntegrationTests
     {
-        private ISelenium _selenium;
+        private IWebDriver _webDriver;
         private Silvernium _silvernium;
 
         [TestInitialize]
         public void SetUp()
         {
-            var uriBuilder = new UriBuilder { Host = "localhost", Port = 4444 };
+            var driver = new InternetExplorerDriver {Url = "http://localhost"};
 
-            var driver = new InternetExplorerDriver();
-            _selenium = new WebDriverBackedSelenium(driver, uriBuilder.Uri);
-
-            _selenium.Start();
-            _selenium.Open("http://localhost");
-            _silvernium = new Silvernium(_selenium, "Test");
+            _silvernium = new Silvernium(driver, "Test");
+            _webDriver = driver;
         }
 
         [TestCleanup]
         public void TearDown()
         {
-            _selenium.Stop();
+            _webDriver.Close();
         }
 
         [TestMethod]

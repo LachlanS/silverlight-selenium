@@ -10,7 +10,7 @@
 
         public TextBlockFixture RequireText(string text)
         {
-            var actualText = Call("GetValue");
+            var actualText = Call("GetValue") as string;
             if (text != actualText)
             {
                 throw new SilverniumFixtureException("Text block doesn't contains expected text '"
@@ -21,7 +21,7 @@
 
         public TextBlockFixture RequireContains(string partialText)
         {
-            var fullText = Call("GetValue");
+            var fullText = Call("GetValue") as string;
             if (fullText == null || !fullText.Contains(partialText))
             {
                 throw new SilverniumFixtureException("Text block does not contains expected partial text " + partialText
@@ -32,7 +32,7 @@
 
         public TextBlockFixture RequireNotContains(string partialText)
         {
-            var fullText = Call("GetValue");
+            var fullText = Call("GetValue") as string;
             if (fullText != null && fullText.Contains(partialText))
             {
                 throw new SilverniumFixtureException("Text block contains unexpected partial text " + partialText

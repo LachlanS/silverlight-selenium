@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace DBServer.Selenium.Silvernium.Fixtures
 {
@@ -20,7 +21,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         {
             var cellPresent = CellPresentCondition(value);
             Wait(cellPresent);
-            var rowIndex = Call("RowContaining", value);
+            var rowIndex = Call("RowContaining", value) as string;
             if (string.IsNullOrEmpty(rowIndex))
                 throw new SilverniumFixtureException("Unable to find row containing value " + value);
             return new DataRowFixture(Silvernium, Path, int.Parse(rowIndex));
@@ -50,7 +51,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         private int RowCount()
         {
-            return int.Parse(Call("RowCount"));
+            return Convert.ToInt32(Call("RowCount"));
         }
 
         public DataGridFixture RequireCellPresent(string value)
@@ -79,7 +80,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             Wait(GridContainsAtLeastOneRowCondition());
             Thread.Sleep(1000);
 
-            var page = Call("GoToPageContaining", PagerPath, value);
+            var page = Call("GoToPageContaining", PagerPath, value) as string;
             if (page == string.Empty)
                 throw new SilverniumFixtureException("Could not find page containing value " + value);
             return this;
@@ -89,7 +90,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         {
             return delegate
             {
-                var invocationResult = Call("RowCount");
+                var invocationResult = Call("RowCount") as string;
                 return !string.IsNullOrEmpty(invocationResult);
             };
         }
@@ -99,7 +100,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             return delegate
             {
                 var result = Call("IsCellPresent", value);
-                return (result == true.ToString());
+                return Convert.ToBoolean(result);
             };
         }
 

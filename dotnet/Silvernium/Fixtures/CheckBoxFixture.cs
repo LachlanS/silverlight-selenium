@@ -1,4 +1,6 @@
-﻿namespace DBServer.Selenium.Silvernium.Fixtures
+﻿using System;
+
+namespace DBServer.Selenium.Silvernium.Fixtures
 {
     public class CheckBoxFixture : ComponentFixture
     {
@@ -23,7 +25,7 @@
         public CheckBoxFixture RequireChecked()
         {
             var value = Call("GetValue");
-            if (!bool.Parse(value))
+            if (!Convert.ToBoolean(value))
             {
                 throw new SilverniumFixtureException("Checkbox was not checked");
             }
@@ -33,7 +35,7 @@
         public CheckBoxFixture RequireUnchecked()
         {
             var value = Call("GetValue");
-            if (bool.Parse(value))
+            if (Convert.ToBoolean(value))
             {
                 throw new SilverniumFixtureException("Checkbox was checked");
             }

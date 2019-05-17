@@ -1,4 +1,6 @@
-﻿namespace DBServer.Selenium.Silvernium.Fixtures
+﻿using System;
+
+namespace DBServer.Selenium.Silvernium.Fixtures
 {
     public class ButtonFixture : ComponentFixture
     {
@@ -16,7 +18,7 @@
 
         public ButtonFixture RequireContent(string content)
         {
-            var actualContent = Call("GetProperty", "Content");
+            var actualContent = Call("GetProperty", "Content") as string;
             if (content != actualContent)
             {
                 throw new SilverniumFixtureException("Button does not contains expected content '" + content + "' "
@@ -28,7 +30,7 @@
         public ButtonFixture RequireEnabled()
         {
             var enabled = Call("IsEnabled");
-            if (!bool.Parse(enabled))
+            if (!Convert.ToBoolean(enabled))
             {
                 throw new SilverniumFixtureException("Button should be enabled");
             }
@@ -38,7 +40,7 @@
         public ButtonFixture RequireDisabled()
         {
             var enabled = Call("IsEnabled");
-            if (bool.Parse(enabled))
+            if (Convert.ToBoolean(enabled))
             {
                 throw new SilverniumFixtureException("Button should be disabled");
             }

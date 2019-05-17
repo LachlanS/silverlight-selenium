@@ -1,4 +1,6 @@
-﻿namespace DBServer.Selenium.Silvernium.Fixtures
+﻿using System;
+
+namespace DBServer.Selenium.Silvernium.Fixtures
 {
     public class RadioButtonFixture : ComponentFixture
     {
@@ -14,7 +16,7 @@
         public RadioButtonFixture RequireSelected()
         {
             var value = Call("GetValue");
-            if (!bool.Parse(value))
+            if (!Convert.ToBoolean(value))
             {
                 throw new SilverniumFixtureException("Radio button was not selected");
             }
@@ -24,7 +26,7 @@
         public RadioButtonFixture RequireUnselected()
         {
             var value = Call("GetValue");
-            if (bool.Parse(value))
+            if (Convert.ToBoolean(value))
             {
                 throw new SilverniumFixtureException("Radio button was selected");
             }

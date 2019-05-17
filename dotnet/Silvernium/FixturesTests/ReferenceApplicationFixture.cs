@@ -2,8 +2,6 @@
 {
     class ReferenceApplicationFixture : SilverlightApplicationFixture
     {
-        private const string Host = "localhost";
-        private const int Port = 4444;
         private const Browser Browser = Fixtures.Browser.InternetExplorer;
         private const string Url = "http://localhost:1981/ReferenceApplication.aspx?testMode=true";
 
@@ -14,7 +12,7 @@
             return _instance ?? (_instance = new ReferenceApplicationFixture());
         }
 
-        private ReferenceApplicationFixture() : base(Host, Port, Browser, Url) { }
+        private ReferenceApplicationFixture() : base(Browser, Url) { }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace DBServer.Selenium.Silvernium.Fixtures
+﻿using System;
+
+namespace DBServer.Selenium.Silvernium.Fixtures
 {
     public class TextBoxFixture : ComponentFixture
     {
@@ -16,7 +18,7 @@
 
         public TextBoxFixture RequireText(string text)
         {
-            var actualText = Call("GetValue");
+            var actualText = Call("GetValue") as string;
             if (text != actualText)
             {
                 throw new SilverniumFixtureException("Text box doesn't contains expected text '" 
@@ -27,7 +29,7 @@
 
         public TextBoxFixture RequireContains(string partialText)
         {
-            var fullText = Call("GetValue");
+            var fullText = Call("GetValue") as string;
             if (fullText == null || !fullText.Contains(partialText))
             {
                 throw new SilverniumFixtureException("Text box does not contains expected partial text " + partialText
@@ -38,7 +40,7 @@
 
         public TextBoxFixture RequireNotContains(string partialText)
         {
-            var fullText = Call("GetValue");
+            var fullText = Call("GetValue") as string;
             if (fullText != null && fullText.Contains(partialText))
             {
                 throw new SilverniumFixtureException("Text box contains unexpected partial text " + partialText
@@ -50,7 +52,7 @@
         public TextBoxFixture RequireEnabled()
         {
             var enabled = Call("IsEnabled");
-            if (!bool.Parse(enabled))
+            if (!Convert.ToBoolean(enabled))
             {
                 throw new SilverniumFixtureException("Text box should be enabled");
             }
@@ -60,7 +62,7 @@
         public TextBoxFixture RequireDisabled()
         {
             var enabled = Call("IsEnabled");
-            if (bool.Parse(enabled))
+            if (Convert.ToBoolean(enabled))
             {
                 throw new SilverniumFixtureException("Text box should be disabled");
             }

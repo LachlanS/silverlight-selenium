@@ -1,7 +1,6 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
-using Selenium;
 using ThoughtWorks.Selenium.Silvernium;
 
 namespace IntegrationTests
@@ -13,31 +12,27 @@ namespace IntegrationTests
         private const string Url = "http://www.markheath.me.uk/silvernibbles";
         private const string ObjectId = "SilverlightControl";
         private const string ScriptKey = "SilverNibbles";
-        private ISelenium _selenium;
+        private IWebDriver _webDriver;
         private Silvernium _silvernium;
 
         [TestInitialize]
         public void SetUp()
         {
-            var uriBuilder = new UriBuilder { Host = "localhost", Port = 4444 };
+            var driver = new InternetExplorerDriver {Url = Url};
 
-            var driver = new InternetExplorerDriver();
-            _selenium = new WebDriverBackedSelenium(driver, uriBuilder.Uri);
-
-            _selenium.Start();
-            _selenium.Open(Url);
-            _silvernium = new Silvernium(_selenium, ObjectId, ScriptKey);
+            _webDriver = driver;
+            _silvernium = new Silvernium(driver, ObjectId, ScriptKey);
         }
 
         [TestCleanup]
         public void TearDown()
         {
-            _selenium.Stop();
+            _webDriver.Close();
         }
         [TestMethod]
         public void ShouldCommunicateWithSilverNibbleApplication()
         {
-            Assert.AreEqual("SilverNibbles", _selenium.GetTitle());
+            Assert.AreEqual("SilverNibbles", _webDriver.Title);
             // verifies default properties in the silverlight object
             Assert.AreEqual(640, _silvernium.ActualWidth());
             Assert.AreEqual(460, _silvernium.ActualHeight());

@@ -3,7 +3,6 @@ using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using Selenium;
 
 namespace DBServer.Selenium.Silvernium.Fixtures
 {
@@ -14,29 +13,30 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         private readonly ThoughtWorks.Selenium.Silvernium.Silvernium _silvernium;
 
-        public SilverlightApplicationFixture(string host, int port, Browser browser, string url)
+        public SilverlightApplicationFixture(Browser browser, string url)
         {
-            var uriBuilder = new UriBuilder { Host = host, Port = port };
-
             IWebDriver driver;
+            IJavaScriptExecutor javaScriptExecutor;
+
             switch (browser)
             {
                 case Browser.Firefox:
-                    driver = new FirefoxDriver();
+                    var firefoxDriver = new FirefoxDriver();
+                    driver = firefoxDriver;
+                    javaScriptExecutor = firefoxDriver;
                     break;
                 case Browser.InternetExplorer:
-                    driver = new InternetExplorerDriver();
+                    var internetExplorerDriver = new InternetExplorerDriver();
+                    driver = internetExplorerDriver;
+                    javaScriptExecutor = internetExplorerDriver;
                     break;
                 default:
                     throw new Exception("Browser is not implemented");
             }
 
-            var selenium = new WebDriverBackedSelenium(driver, uriBuilder.Uri);
+            driver.Url = url;
 
-            selenium.Start();
-            selenium.Open(url);
-            selenium.SetSpeed("100");
-            _silvernium = new ThoughtWorks.Selenium.Silvernium.Silvernium(selenium, ObjectId, Scriptkey);
+            _silvernium = new ThoughtWorks.Selenium.Silvernium.Silvernium(javaScriptExecutor, ObjectId, Scriptkey);
             while (!_silvernium.IsLoaded())
             {
                 Thread.Sleep(100);

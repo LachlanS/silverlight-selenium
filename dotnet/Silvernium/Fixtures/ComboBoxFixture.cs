@@ -1,4 +1,5 @@
-﻿using System.Linq; 
+﻿using System;
+using System.Linq; 
 
 namespace DBServer.Selenium.Silvernium.Fixtures
 {
@@ -18,7 +19,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
 
         public ComboBoxFixture RequireValue(string value)
         {
-            var actualValue = Call("GetValue").Split('|');
+            var actualValue = Call("GetValue").ToString().Split('|');
             if (!actualValue.Contains(value))
             {
                 throw new SilverniumFixtureException("Expected value wasn't selected '" 
@@ -30,7 +31,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public ComboBoxFixture RequireEnabled()
         {
             var enabled = Call("IsEnabled");
-            if (!bool.Parse(enabled))
+            if (!Convert.ToBoolean(enabled))
             {
                 throw new SilverniumFixtureException("Combo box should be enabled");
             }
@@ -40,7 +41,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
         public ComboBoxFixture RequireDisabled()
         {
             var enabled = Call("IsEnabled");
-            if (bool.Parse(enabled))
+            if (Convert.ToBoolean(enabled))
             {
                 throw new SilverniumFixtureException("Combo box should be disabled");
             }

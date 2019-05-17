@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using Selenium;
+using OpenQA.Selenium;
 
 namespace DBServer.Selenium.Silvernium.Fixtures
 {
@@ -78,7 +78,7 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             return delegate
             {
                 var invocationResult = Silvernium.Call("FindControl", path);
-                return invocationResult != "null";
+                return invocationResult != null;
             };
         }
 
@@ -87,11 +87,11 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             return delegate
             {
                 var invocationResult = Silvernium.Call("FindControl", gridPath, rowIndex.ToString(), path);
-                return invocationResult != "null";
+                return invocationResult != null;
             };
         }
 
-        protected string Call(string functionName, params string[] parameters)
+        protected object Call(string functionName, params string[] parameters)
         {
             var parametersWithPath = new List<string>();
             if (GridPath != null)
@@ -102,27 +102,25 @@ namespace DBServer.Selenium.Silvernium.Fixtures
             parametersWithPath.Add(Path);
             parametersWithPath.AddRange(parameters);
 
-            const int maxRetry = 10;
+            var retries = 10;
             const int sleepInterval = 500;
-            for (var i = 0; i < maxRetry; i++)
+            while (true)
             {
                 try
                 {
                     return Silvernium.Call(functionName, parametersWithPath.ToArray());
                 }
-                catch (SeleniumException)
+                catch (WebDriverException)
                 {
-                    if (i < maxRetry)
+                    if (--retries == 0)
                     {
                         Thread.Sleep(sleepInterval);
                     }
-                    else
                     {
                         throw;
                     }
                 }
             }
-            return null;
         }
     }
 }
