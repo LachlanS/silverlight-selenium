@@ -69,6 +69,7 @@
     <Compile Include="ButtonFixtureWithinDataGridTest.cs" />
     <Compile Include="CheckBoxFixtureWithinDataGridTest.cs" />
     <Compile Include="ComboBoxFixtureWithinDataGridTest.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="TextBoxFixtureWithinDataGridTest.cs" />
     <Compile Include="TextBlockFixtureWithinDataGridTest.cs" />
     <Compile Include="DataRowFixtureTest.cs" />
